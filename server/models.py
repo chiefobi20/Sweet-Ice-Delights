@@ -17,12 +17,14 @@ class User(db.Model, SerializerMixin):
     password_hash = db.Column(db.string)
 
 # Add User relationship
-
+    orders = db.relationship("Order", back_populates="user", cascade="all")
+    carts = db.relationship("Cart", back_populates="cart", cascade="all")
 
 # Add serialization rules
+serialize_rules = ('-orders.user',)
 
 
-# Add validation
+# Add validations
 
 
 class Order(db.Model, SerializerMixin):
@@ -39,7 +41,7 @@ class Order(db.Model, SerializerMixin):
 # Add serialization rules
 
 
-# Add validation
+# Add validations
 
 
 class OrderItem(db.Model, SerializerMixin):
@@ -57,7 +59,7 @@ class OrderItem(db.Model, SerializerMixin):
 # Add serialization rules
 
 
-# Add validation
+# Add validations
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
@@ -73,4 +75,57 @@ class Product(db.Model, SerializerMixin):
 # Add Product relationship
 
 
-# Add
+# Add serialization rules
+
+
+# Add vaildations
+
+
+class Cart(db.Model, SerializerMixin):
+    __tablename__ = "carts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.Timestamp)
+    is_active = db.Column(db.Boolean)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+# Add Cart relationship
+
+
+# Add serialization rules
+
+
+# Add validations
+
+class CartItem(db.Model, SerializerMixin):
+    __tablename__ = "cart_items"
+
+    id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer)
+    cart_id = db.Column(db.Integer, db.ForeignKey("carts.id"))
+    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
+
+# Add CartItem relationship
+
+
+# Add serialization rules
+
+
+# Add validations
+
+class Review(db.Model, SerializerMixin):
+    __tablename__ = "reviews"
+
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Integer)
+    comment = db.Column(db.String)
+    created_at = db.Column(db.Timestamp)
+    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
+
+# Add Review relationship
+
+
+# Add serialization rules
+
+
+# Add validations
