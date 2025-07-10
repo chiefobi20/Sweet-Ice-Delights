@@ -21,11 +21,26 @@ class User(db.Model, SerializerMixin):
     carts = db.relationship("Cart", back_populates="cart", cascade="all")
 
 # Add serialization rules
-    serialize_rules = ('-orders.user',)
+    serialize_rules = ('-orders.user', '-carts.user')
 
 
 # Add validations
+    @validates("username")
+    def validates_username(self, key, value):
+        if (not isinstance(value, str)) or (len(value) < 0):
+            raise ValueError("Username must be filled out")
+        else:
+            return value
 
+    @validates("email")
+    def validates_email(self, key, value):
+        if (not isinstance(value, str)) or ('@' not in value):
+            raise ValueError("Include @ for email")
+        else:
+            return value
+
+    def __repr__(self):
+        return f"<User {self.id}, {self.username}, {self.email}>"
 
 class Order(db.Model, SerializerMixin):
     __tablename__ = "orders"
@@ -42,8 +57,6 @@ class Order(db.Model, SerializerMixin):
 # Add serialization rules
 
 
-# Add validations
-
 
 class OrderItem(db.Model, SerializerMixin):
     __tablename__ = "order_items"
@@ -58,10 +71,10 @@ class OrderItem(db.Model, SerializerMixin):
     order = db.relationship("Order", back_populates = "order_items")
     product = db.relationship("Product", back_populates="order_items")
 # Add serialization rules
-    serialize_rules = ("-order.order_items",)
+    serialize_rules = ("-order.order_items","-product",)
 
     def __repr__(self):
-        return f"<OrderItem {self.id}: {self.order_id}, {}"
+        return f"<OrderItem {self.id}: {self.order_id}, {self.product_id}, {self.quantity}, {self.price}"
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
@@ -76,7 +89,7 @@ class Product(db.Model, SerializerMixin):
 
 # Add Product relationship
     order_items = db.relationship("OrderItem", back_populates="product", cascade="all")
-
+    reviews = db.relationship("Review", back_populates="product", cascade="all")
 # Add serialization rules
     serialize_rules = ('-order_items.product',)
 
@@ -125,9 +138,9 @@ class Review(db.Model, SerializerMixin):
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
 
 # Add Review relationship
-
+    product = db.relationship("Product", back_populates="reviews")
 
 # Add serialization rules
-
+    serialize_rules = ("-product",)
 
 # Add validations
