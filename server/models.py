@@ -21,7 +21,7 @@ class User(db.Model, SerializerMixin):
     carts = db.relationship("Cart", back_populates="cart", cascade="all")
 
 # Add serialization rules
-serialize_rules = ('-orders.user',)
+    serialize_rules = ('-orders.user',)
 
 
 # Add validations
@@ -36,7 +36,8 @@ class Order(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
 # Add Order relationship
-
+    user = db.relationship("User", back_populates="orders")
+    order_items = db.relationship("OrderItem", back_populates="order", cascade="all")
 
 # Add serialization rules
 
@@ -54,12 +55,13 @@ class OrderItem(db.Model, SerializerMixin):
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
 
 # Add OrderItem relationship
-
-
+    order = db.relationship("Order", back_populates = "order_items")
+    product = db.relationship("Product", back_populates="order_items")
 # Add serialization rules
+    serialize_rules = ("-order.order_items",)
 
-
-# Add validations
+    def __repr__(self):
+        return f"<OrderItem {self.id}: {self.order_id}, {}"
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
@@ -73,10 +75,10 @@ class Product(db.Model, SerializerMixin):
     size = db.Column(db.String)
 
 # Add Product relationship
-
+    order_items = db.relationship("OrderItem", back_populates="product", cascade="all")
 
 # Add serialization rules
-
+    serialize_rules = ('-order_items.product',)
 
 # Add vaildations
 
