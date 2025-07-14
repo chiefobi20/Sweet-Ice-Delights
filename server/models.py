@@ -3,7 +3,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import validates
 from flask_sqlalchemy import SQLAlchemy
 
-from config import db
+from server.config import db
 
 
 class User(db.Model, SerializerMixin):
