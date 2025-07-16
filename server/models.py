@@ -55,7 +55,7 @@ class Order(db.Model, SerializerMixin):
     order_items = db.relationship("OrderItem", back_populates="order", cascade="all")
 
 # Add serialization rules
-
+    serialize_rules = ()
 
 
 class OrderItem(db.Model, SerializerMixin):
