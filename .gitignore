@@ -1,0 +1,21 @@
+# Python envs
+venv/
+.venv/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# Migrations
+server/migrations/
+
+# Logs
+*.log
