@@ -84,6 +84,13 @@
   gap: 1.5rem;
 }
 
+/* Welcome Text */
+.welcome-text {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 /* Cart Link */
 .cart-link {
   position: relative;
@@ -103,49 +110,6 @@
   transform: translateY(-1px);
 }
 
-.cart-badge {
-  background: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  position: absolute;
-  top: -5px;
-  right: -5px;
-}
-
-/* User Menu */
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.welcome-text {
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
-
-.logout-btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.5);
-}
-
 /* Auth Links */
 .auth-links {
   display: flex;
@@ -157,24 +121,30 @@
   color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border-radius: 15px;
+  border-radius: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
   transition: all 0.3s ease;
-  border: 1px solid transparent;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .auth-link:hover {
   background: rgba(255,255,255,0.1);
-}
-
-.auth-link.register {
-  background: linear-gradient(45deg, #e74c3c, #f39c12);
-  border: none;
-  font-weight: 600;
-}
-
-.auth-link.register:hover {
+  border-color: rgba(255,255,255,0.5);
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.logout-btn {
+  background: rgba(231, 76, 60, 0.8);
+  border-color: #e74c3c;
+}
+
+.logout-btn:hover {
+  background: #e74c3c;
+  border-color: #c0392b;
 }
 
 /* Mobile Responsive */

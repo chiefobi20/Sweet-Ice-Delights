@@ -11,33 +11,41 @@ function Header() {
 
   return (
     <header className="header">
-      <div className="header-content">
+      <div className="header-container">
         <Link to="/" className="logo">
-          🍧 Sweet Ice Delights
+          <span className="logo-icon">🍧</span>
+          Sweet Ice Delights
         </Link>
 
-        <nav className="nav">
+        <nav className="main-nav">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/flavors" className="nav-link">Flavors</Link>
           <Link to="/about" className="nav-link">About</Link>
+          <Link to="/contact" className="nav-link">Contact</Link>
+          <Link to="/hours" className="nav-link">Hours</Link>
+        </nav>
 
+        <div className="header-actions">
           {user ? (
             <>
-              <Link to="/cart" className="nav-link cart-link">
-                Cart ({cartItemCount})
+              <span className="welcome-text">Welcome, {user.name || user.email}!</span>
+              <Link to="/cart" className="cart-link">
+                🛒 Cart ({cartItemCount})
               </Link>
-              <Link to="/orders" className="nav-link">Orders</Link>
-              <button onClick={logout} className="nav-link logout-btn">
-                Logout
-              </button>
+              <div className="auth-links">
+                <Link to="/orders" className="auth-link">Orders</Link>
+                <button onClick={logout} className="auth-link logout-btn">
+                  Logout
+                </button>
+              </div>
             </>
           ) : (
-            <>
-              <Link to="/login" className="nav-link">Login</Link>
-              <Link to="/register" className="nav-link">Register</Link>
-            </>
+            <div className="auth-links">
+              <Link to="/login" className="auth-link">Login</Link>
+              <Link to="/register" className="auth-link">Register</Link>
+            </div>
           )}
-        </nav>
+        </div>
       </div>
     </header>
   );

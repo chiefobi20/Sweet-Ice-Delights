@@ -1,22 +1,15 @@
+import { BrowserRouter as Router } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
-import FlavorList from './FlavorList';
+import Home from './Home';
 
 function App() {
   console.log('🏠 App component rendering');
 
   return (
-    <div className="App">
+    <div className="app">
       <Header />
-      <main>
-        <h1>Welcome to Sweet Ice Delights!</h1>
-        <p>Your favorite Italian ice shop</p>
-
-        <section className="featured-flavors">
-          <h3>Featured Flavors</h3>
-          <FlavorList limit={6} showViewAll={true} />
-        </section>
-      </main>
+      <Home />
       <Footer />
     </div>
   );
