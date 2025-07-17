@@ -1,18 +1,44 @@
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+
 function Header() {
+  const { isAuthenticated, user, logout } = useAuth();
+  const { cart } = useCart();
+
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <header className="header">
-      <nav>
-        <h1>Sweet Ice Delights</h1>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/products">Products</a></li>
-          <li><a href="/cart">Cart</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </nav>
+      <div className="header-content">
+        <Link to="/" className="logo">
+          🍧 Sweet Ice Delights
+        </Link>
+
+        <nav className="nav">
+          <Link to="/flavors">Flavors</Link>
+
+          {isAuthenticated ? (
+            <>
+              <Link to="/cart" className="cart-link">
+                Cart ({cartItemCount})
+              </Link>
+              <Link to="/orders">My Orders</Link>
+              <span>Hello, {user?.username}!</span>
+              <button onClick={logout} className="logout-btn">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )}
+        </nav>
+      </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

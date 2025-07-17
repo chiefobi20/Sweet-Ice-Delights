@@ -1,31 +1,40 @@
-# Standard library imports
-
-# Remote library imports
+import os
 from flask import Flask
-from flask_cors import CORS
-from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
+from flask_jwt_extended import JWTManager
+from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
+from flask_cors import CORS
 
-# Local imports
-
-# Instantiate app, set attributes
+# Initialize Flask app
 app = Flask(__name__)
+
+# Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+app.config['JWT_SECRET_KEY'] = 'your-secret-key-change-this-in-production'
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 
-# Define metadata, instantiate db
-metadata = MetaData(naming_convention={
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-})
-db = SQLAlchemy(metadata=metadata)
+# Initialize extensions
+db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-db.init_app(app)
-
-# Instantiate REST API
+jwt = JWTManager(app)
+bcrypt = Bcrypt(app)
 api = Api(app)
 
-# Instantiate CORS
-CORS(app)
+# Enable CORS
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3001"}})  # Changed from 3000 to 3001
+
+# JWT error handlers
+@jwt.expired_token_loader
+def expired_token_callback(jwt_header, jwt_payload):
+    return {'message': 'Token has expired'}, 401
+
+@jwt.invalid_token_loader
+def invalid_token_callback(error):
+    return {'message': 'Invalid token'}, 401
+
+@jwt.unauthorized_loader
+def missing_token_callback(error):
+    return {'message': 'Authorization token is required'}, 401

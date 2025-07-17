@@ -1,146 +1,95 @@
-from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import validates
-from sqlalchemy import MetaData
 from flask_sqlalchemy import SQLAlchemy
-
-from config import db
-
-# Models go here!
+from sqlalchemy_serializer import SerializerMixin
+from flask_bcrypt import Bcrypt
+from config import db, bcrypt
 
 class User(db.Model, SerializerMixin):
-    __tablename__ = "users"
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
-    email = db.Column(db.String)
-    password_hash = db.Column(db.string)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128))  # Changed from _password_hash
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-# Add User relationship
-    orders = db.relationship("Order", back_populates="user", cascade="all")
-    carts = db.relationship("Cart", back_populates="cart", cascade="all")
+    orders = db.relationship('Order', backref='user', lazy=True)
 
-# Add serialization rules
-    serialize_rules = ('-orders.user', '-carts.user')
+    @property
+    def password(self):
+        raise AttributeError('Password is not readable')
 
+    @password.setter
+    def password(self, password):
+        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')  # Updated
 
-# Add validations
-    @validates("username")
-    def validates_username(self, key, value):
-        if (not isinstance(value, str)) or (len(value) < 0):
-            raise ValueError("Username must be filled out")
-        else:
-            return value
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password_hash, password)  # Updated
 
-    @validates("email")
-    def validates_email(self, key, value):
-        if (not isinstance(value, str)) or ('@' not in value):
-            raise ValueError("Include @ for email")
-        else:
-            return value
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
 
-    def __repr__(self):
-        return f"<User {self.id}, {self.username}, {self.email}>"
+class Flavor(db.Model, SerializerMixin):
+    __tablename__ = 'flavors'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    price_cents = db.Column(db.Integer, nullable=False)
+    available = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+    order_items = db.relationship('OrderItem', backref='flavor', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price_cents': self.price_cents,
+            'available': self.available
+        }
 
 class Order(db.Model, SerializerMixin):
-    __tablename__ = "orders"
+    __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.Timestamp)
-    status = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    total_cents = db.Column(db.Integer, nullable=False, default=0)
+    status = db.Column(db.String(50), default='pending')
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-# Add Order relationship
-    user = db.relationship("User", back_populates="orders")
-    order_items = db.relationship("OrderItem", back_populates="order", cascade="all")
+    order_items = db.relationship('OrderItem', backref='order', lazy=True, cascade='all, delete-orphan')
 
-# Add serialization rules
-    serialize_rules = ()
-
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'total_cents': self.total_cents,
+            'status': self.status,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'items': [item.to_dict() for item in self.order_items]
+        }
 
 class OrderItem(db.Model, SerializerMixin):
-    __tablename__ = "order_items"
+    __tablename__ = 'order_items'
 
     id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.Integer)
-    price = db.Column(db.Numeric)
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
+    flavor_id = db.Column(db.Integer, db.ForeignKey('flavors.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False, default=1)
+    price_cents = db.Column(db.Integer, nullable=False)
 
-# Add OrderItem relationship
-    order = db.relationship("Order", back_populates = "order_items")
-    product = db.relationship("Product", back_populates="order_items")
-# Add serialization rules
-    serialize_rules = ("-order.order_items","-product",)
-
-    def __repr__(self):
-        return f"<OrderItem {self.id}: {self.order_id}, {self.product_id}, {self.quantity}, {self.price}"
-
-class Product(db.Model, SerializerMixin):
-    __tablename__ = "products"
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer)
-    description = db.Column(db.String)
-    price = db.Column(db.Numeric)
-    image_url = db.Column(db.String)
-    available = db.Column(db.Boolean)
-    size = db.Column(db.String)
-
-# Add Product relationship
-    order_items = db.relationship("OrderItem", back_populates="product", cascade="all")
-    reviews = db.relationship("Review", back_populates="product", cascade="all")
-# Add serialization rules
-    serialize_rules = ('-order_items.product',)
-
-# Add vaildations
-
-
-class Cart(db.Model, SerializerMixin):
-    __tablename__ = "carts"
-
-    id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.Timestamp)
-    is_active = db.Column(db.Boolean)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-
-# Add Cart relationship
-
-
-# Add serialization rules
-
-
-# Add validations
-
-class CartItem(db.Model, SerializerMixin):
-    __tablename__ = "cart_items"
-
-    id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.Integer)
-    cart_id = db.Column(db.Integer, db.ForeignKey("carts.id"))
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
-
-# Add CartItem relationship
-
-
-# Add serialization rules
-
-
-# Add validations
-
-class Review(db.Model, SerializerMixin):
-    __tablename__ = "reviews"
-
-    id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.Integer)
-    comment = db.Column(db.String)
-    created_at = db.Column(db.Timestamp)
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
-
-# Add Review relationship
-    product = db.relationship("Product", back_populates="reviews")
-
-# Add serialization rules
-    serialize_rules = ("-product",)
-
-# Add validations
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'order_id': self.order_id,
+            'flavor_id': self.flavor_id,
+            'quantity': self.quantity,
+            'price_cents': self.price_cents,  # Updated
+            'flavor_name': self.flavor.name if self.flavor else None
+        }
