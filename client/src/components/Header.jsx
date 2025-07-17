@@ -3,10 +3,11 @@ import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
 function Header() {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { user, logout } = useAuth();
   const { cart } = useCart();
 
-  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  // Add safety check for cart array
+  const cartItemCount = cart ? cart.reduce((total, item) => total + item.quantity, 0) : 0;
 
   return (
     <header className="header">
@@ -16,23 +17,24 @@ function Header() {
         </Link>
 
         <nav className="nav">
-          <Link to="/flavors">Flavors</Link>
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/flavors" className="nav-link">Flavors</Link>
+          <Link to="/about" className="nav-link">About</Link>
 
-          {isAuthenticated ? (
+          {user ? (
             <>
-              <Link to="/cart" className="cart-link">
+              <Link to="/cart" className="nav-link cart-link">
                 Cart ({cartItemCount})
               </Link>
-              <Link to="/orders">My Orders</Link>
-              <span>Hello, {user?.username}!</span>
-              <button onClick={logout} className="logout-btn">
+              <Link to="/orders" className="nav-link">Orders</Link>
+              <button onClick={logout} className="nav-link logout-btn">
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/register" className="nav-link">Register</Link>
             </>
           )}
         </nav>
