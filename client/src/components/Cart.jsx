@@ -35,7 +35,6 @@ function Cart() {
   return (
     <div className="cart">
       <div className="page-header">
-        <Link to="/" className="back-home-btn">← Home</Link>
         <h2>Your Cart ({cart.length} items)</h2>
       </div>
 

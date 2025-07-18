@@ -2,90 +2,46 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
+import Layout from './components/Layout.jsx'
 import App from './components/App.jsx'
 import FlavorList from './components/FlavorList.jsx'
 import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import Hours from './components/Hours.jsx'
-import Cart from './components/Cart.jsx'
 import Login from './components/Login.jsx'
-import Register from './components/Register.jsx'
-import OrderForm from './components/OrderForm.jsx'
-import OrderHistory from './components/OrderHistory.jsx'
-import OrderDetails from './components/OrderDetails.jsx'
-import ProtectedRoute from './components/ProtectedRoute.jsx'
-import { CartProvider } from './context/CartContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Layout><App /></Layout>,
   },
   {
     path: "/flavors",
-    element: <FlavorList />,
+    element: <Layout><FlavorList /></Layout>,
   },
   {
     path: "/about",
-    element: <About />,
+    element: <Layout><About /></Layout>,
   },
   {
     path: "/contact",
-    element: <Contact />,
+    element: <Layout><Contact /></Layout>,
   },
   {
     path: "/hours",
-    element: <Hours />,
-  },
-  {
-    path: "/cart",
-    element: (
-      <ProtectedRoute>
-        <Cart />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/checkout",
-    element: (
-      <ProtectedRoute>
-        <OrderForm />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/orders",
-    element: (
-      <ProtectedRoute>
-        <OrderHistory />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/orders/:orderId",
-    element: (
-      <ProtectedRoute>
-        <OrderDetails />
-      </ProtectedRoute>
-    ),
+    element: <Layout><Hours /></Layout>,
   },
   {
     path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
+    element: <Layout><Login /></Layout>,
   }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <CartProvider>
-        <RouterProvider router={router} />
-      </CartProvider>
+      <RouterProvider router={router} />
     </AuthProvider>
   </StrictMode>,
 )

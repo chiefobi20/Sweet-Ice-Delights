@@ -9,10 +9,8 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128))  # Changed from _password_hash
+    password_hash = db.Column(db.String(128))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
-
-    orders = db.relationship('Order', backref='user', lazy=True)
 
     @property
     def password(self):
@@ -20,10 +18,10 @@ class User(db.Model, SerializerMixin):
 
     @password.setter
     def password(self, password):
-        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')  # Updated
+        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
 
     def check_password(self, password):
-        return bcrypt.check_password_hash(self.password_hash, password)  # Updated
+        return bcrypt.check_password_hash(self.password_hash, password)
 
     def to_dict(self):
         return {
@@ -43,8 +41,6 @@ class Flavor(db.Model, SerializerMixin):
     available = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    order_items = db.relationship('OrderItem', backref='flavor', lazy=True)
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -54,42 +50,28 @@ class Flavor(db.Model, SerializerMixin):
             'available': self.available
         }
 
-class Order(db.Model, SerializerMixin):
-    __tablename__ = 'orders'
+class ContactMessage(db.Model, SerializerMixin):
+    __tablename__ = 'contact_messages'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    total_cents = db.Column(db.Integer, nullable=False, default=0)
-    status = db.Column(db.String(50), default='pending')
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    phone = db.Column(db.String(20))
+    event_type = db.Column(db.String(50))
+    message = db.Column(db.Text, nullable=False)
+    selected_dates = db.Column(db.Text)  # Comma-separated dates
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    order_items = db.relationship('OrderItem', backref='order', lazy=True, cascade='all, delete-orphan')
-
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
-            'total_cents': self.total_cents,
-            'status': self.status,
-            'created_at': self.created_at.isoformat() if self.created_at else None,
-            'items': [item.to_dict() for item in self.order_items]
+            'name': self.name,
+            'email': self.email,
+            'phone': self.phone,
+            'event_type': self.event_type,
+            'message': self.message,
+            'selected_dates': self.selected_dates.split(',') if self.selected_dates else [],
+            'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
-class OrderItem(db.Model, SerializerMixin):
-    __tablename__ = 'order_items'
 
-    id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
-    flavor_id = db.Column(db.Integer, db.ForeignKey('flavors.id'), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False, default=1)
-    price_cents = db.Column(db.Integer, nullable=False)
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'order_id': self.order_id,
-            'flavor_id': self.flavor_id,
-            'quantity': self.quantity,
-            'price_cents': self.price_cents,  # Updated
-            'flavor_name': self.flavor.name if self.flavor else None
-        }

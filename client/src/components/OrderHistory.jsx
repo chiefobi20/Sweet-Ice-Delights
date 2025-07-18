@@ -28,7 +28,6 @@ function OrderHistory() {
   return (
     <div className="order-history">
       <div className="page-header">
-        <Link to="/" className="back-home-btn">← Home</Link>
         <h2>Your Orders</h2>
       </div>
 

@@ -4,7 +4,6 @@ function About() {
   return (
     <div className="about">
       <div className="page-header">
-        <Link to="/" className="back-home-btn">← Home</Link>
         <h1>About Sweet Ice Delights</h1>
       </div>
 

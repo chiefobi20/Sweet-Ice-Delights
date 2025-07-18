@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required, get_jwt_identity
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from datetime import datetime
+import os
 
 # Local imports
 from config import app, db, api
-from models import User, Flavor, Order, OrderItem
+from models import User, Flavor, ContactMessage
 from auth import Register, Login, Profile, RefreshToken
 
 # Ensure database tables exist
@@ -30,73 +34,88 @@ class Flavors(Resource):
         except Exception as e:
             return {'error': str(e)}, 500
 
-class Orders(Resource):
-    @jwt_required()
-    def get(self):
-        current_user_id = get_jwt_identity()
-        orders = Order.query.filter_by(user_id=current_user_id).all()
-        return [order.to_dict() for order in orders], 200
-
-    @jwt_required()
+class Contact(Resource):
     def post(self):
-        current_user_id = get_jwt_identity()
-        data = request.get_json()
+        try:
+            data = request.get_json()
 
-        # Create order
-        order = Order(
-            user_id=current_user_id,
-            total_cents=data.get('total_cents'),
-            status='pending'
-        )
-        db.session.add(order)
-        db.session.flush()  # Get order ID
-
-        # Add order items
-        for item_data in data.get('items', []):
-            order_item = OrderItem(
-                order_id=order.id,
-                flavor_id=item_data['flavor_id'],
-                quantity=item_data['quantity'],
-                price_cents=item_data['price_cents']
+            # Save to database
+            contact_message = ContactMessage(
+                name=data.get('name'),
+                email=data.get('email'),
+                phone=data.get('phone'),
+                event_type=data.get('eventType'),
+                message=data.get('message'),
+                selected_dates=','.join(data.get('selectedDates', []))
             )
-            db.session.add(order_item)
 
-        db.session.commit()
-        return order.to_dict(), 201
+            db.session.add(contact_message)
+            db.session.commit()
 
-class OrderDetail(Resource):
-    @jwt_required()
-    def get(self, order_id):
-        current_user_id = get_jwt_identity()
-        order = Order.query.filter_by(id=order_id, user_id=current_user_id).first()
+            # Send email notification (using dummy email for testing)
+            self.send_notification_email(data)
 
-        if not order:
-            return {'message': 'Order not found'}, 404
+            return {'message': 'Contact form submitted successfully'}, 200
 
-        return order.to_dict(), 200
+        except Exception as e:
+            print(f"Error processing contact form: {str(e)}")
+            return {'error': 'Failed to process contact form'}, 500
 
-    @jwt_required()
-    def delete(self, order_id):
-        current_user_id = get_jwt_identity()
-        order = Order.query.filter_by(id=order_id, user_id=current_user_id).first()
+    def send_notification_email(self, data):
+        """Send email notification using environment variables"""
+        try:
+            # Get email settings from environment variables
+            smtp_server = app.config['SMTP_SERVER']
+            smtp_port = app.config['SMTP_PORT']
+            sender_email = app.config['SENDER_EMAIL']
+            sender_password = app.config['SENDER_PASSWORD']
+            recipient_email = app.config['RECIPIENT_EMAIL']
 
-        if not order:
-            return {'message': 'Order not found'}, 404
+            # Create message
+            msg = MIMEMultipart()
+            msg['From'] = sender_email
+            msg['To'] = recipient_email
+            msg['Subject'] = f"New Contact Form Submission - {data.get('name')}"
 
-        if order.status != 'pending':
-            return {'message': 'Can only cancel pending orders'}, 400
+            # Email body
+            body = f"""
+            New contact form submission from Sweet Ice Delights website:
 
-        # Update status instead of deleting
-        order.status = 'cancelled'
-        db.session.commit()
+            Name: {data.get('name')}
+            Email: {data.get('email')}
+            Phone: {data.get('phone', 'Not provided')}
+            Event Type: {data.get('eventType', 'Not specified')}
 
-        return {'message': 'Order cancelled successfully'}, 200
+            Selected Dates: {', '.join(data.get('selectedDates', [])) if data.get('selectedDates') else 'None selected'}
+
+            Message:
+            {data.get('message')}
+
+            Submitted at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+            """
+
+            msg.attach(MIMEText(body, 'plain'))
+
+            # Send email (uncomment when ready to test)
+            server = smtplib.SMTP(smtp_server, smtp_port)
+            server.starttls()
+            server.login(sender_email, sender_password)
+            text = msg.as_string()
+            server.sendmail(sender_email, recipient_email, text)
+            server.quit()
+
+            print("✅ Email notification sent successfully!")
+            print("📧 Email content:", body)
+
+        except Exception as e:
+            print(f"❌ Failed to send email: {str(e)}")
+            # Still log the content for debugging
+            print("📧 Email content that would have been sent:", body)
 
 # Add resources to API
 api.add_resource(Users, '/api/users')
 api.add_resource(Flavors, '/api/flavors')
-api.add_resource(Orders, '/api/orders')
-api.add_resource(OrderDetail, '/api/orders/<int:order_id>')
+api.add_resource(Contact, '/api/contact')
 
 # Auth routes
 api.add_resource(Register, '/api/register')

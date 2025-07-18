@@ -4,7 +4,6 @@ function Hours() {
   return (
     <div className="hours">
       <div className="page-header">
-        <Link to="/" className="back-home-btn">← Home</Link>
         <h1>Store Hours</h1>
       </div>
 
@@ -13,7 +12,7 @@ function Hours() {
         <section className="hours-hero">
           <h2>🕒 When We're Open</h2>
           <p className="lead">
-            We're here to serve you fresh Italian ice throughout the week! 
+            We're here to serve you fresh Italian ice throughout the week!
             Come visit us during these hours for the best selection and freshest treats.
           </p>
         </section>
@@ -51,8 +50,8 @@ function Hours() {
             <div className="info-card">
               <h4>📞 Special Hours & Holidays</h4>
               <p>
-                Hours may vary during holidays and special events. 
-                Call us at <a href="tel:+15551234356">(555) 123-GELATO</a> 
+                Hours may vary during holidays and special events.
+                Call us at <a href="tel:+15551234356">(555) 123-GELATO</a>
                 or check our social media for any updates!
               </p>
             </div>

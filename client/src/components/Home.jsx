@@ -1,10 +1,7 @@
 import { Link } from 'react-router-dom';
 import FlavorList from './FlavorList';
-import { useAuth } from '../context/AuthContext';
 
 function Home() {
-  const { isAuthenticated } = useAuth();
-
   return (
     <main className="home">
       {/* Hero Section */}
@@ -20,11 +17,58 @@ function Home() {
           <Link to="/flavors" className="cta-button primary">
             View All Flavors
           </Link>
-          {!isAuthenticated && (
-            <Link to="/register" className="cta-button secondary">
-              Join Sweet Ice Family
-            </Link>
-          )}
+          <Link to="/contact" className="cta-button secondary">
+            Contact Us
+          </Link>
+        </div>
+      </section>
+
+      {/* Image Carousel Section */}
+      <section className="image-carousel-section">
+        <h2>Our Delicious Creations</h2>
+        <div className="image-carousel">
+          <div className="carousel-track">
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop" alt="Colorful Italian Ice" />
+              <p>Rainbow Italian Ice</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?w=400&h=300&fit=crop" alt="Lemon Granita" />
+              <p>Fresh Lemon Granita</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=400&h=300&fit=crop" alt="Strawberry Ice" />
+              <p>Strawberry Delight</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&h=300&fit=crop" alt="Blue Raspberry" />
+              <p>Blue Raspberry</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&h=300&fit=crop" alt="Orange Creamsicle" />
+              <p>Orange Creamsicle</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&h=300&fit=crop" alt="Cherry Italian Ice" />
+              <p>Cherry Blast</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop" alt="Tropical Mix" />
+              <p>Tropical Paradise</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop" alt="Grape Italian Ice" />
+              <p>Grape Sensation</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Mint Italian Ice" />
+              <p>Cool Mint</p>
+            </div>
+            <div className="carousel-item">
+              <img src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?w=400&h=300&fit=crop" alt="Peach Italian Ice" />
+              <p>Peachy Keen</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -65,13 +109,11 @@ function Home() {
           <p>Beat the heat with our refreshing Italian ice. Perfect for any time of day!</p>
           <div className="cta-buttons">
             <Link to="/flavors" className="cta-button primary">
-              Order Now
+              View Flavors
             </Link>
-            {isAuthenticated && (
-              <Link to="/orders" className="cta-button secondary">
-                View My Orders
-              </Link>
-            )}
+            <Link to="/contact" className="cta-button secondary">
+              Visit Our Store
+            </Link>
           </div>
         </div>
       </section>

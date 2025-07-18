@@ -1,21 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { useCart } from '../context/CartContext';
 
 function Header() {
   const { user, logout } = useAuth();
-  const { cart } = useCart();
-
-  // Add safety check for cart array
-  const cartItemCount = cart ? cart.reduce((total, item) => total + item.quantity, 0) : 0;
 
   return (
     <header className="header">
       <div className="header-container">
-        <Link to="/" className="logo">
+        <div className="logo">
           <span className="logo-icon">🍧</span>
           Sweet Ice Delights
-        </Link>
+        </div>
 
         <nav className="main-nav">
           <Link to="/" className="nav-link">Home</Link>
@@ -29,11 +24,7 @@ function Header() {
           {user ? (
             <>
               <span className="welcome-text">Welcome, {user.name || user.email}!</span>
-              <Link to="/cart" className="cart-link">
-                🛒 Cart ({cartItemCount})
-              </Link>
               <div className="auth-links">
-                <Link to="/orders" className="auth-link">Orders</Link>
                 <button onClick={logout} className="auth-link logout-btn">
                   Logout
                 </button>
@@ -42,7 +33,6 @@ function Header() {
           ) : (
             <div className="auth-links">
               <Link to="/login" className="auth-link">Login</Link>
-              <Link to="/register" className="auth-link">Register</Link>
             </div>
           )}
         </div>
