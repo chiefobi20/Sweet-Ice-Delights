@@ -6,19 +6,55 @@ function FlavorList({ limit, showViewAll = false }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Default images for flavors - better frozen treat images
+  const flavorImages = {
+    "Cherry": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop", // Cherry popsicle
+    "Blue Raspberry": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop", // Blue ice cream
+    "Lemon": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop", // Lemon sorbet
+    "Orange": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&h=300&fit=crop", // Orange popsicle
+    "Grape": "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=300&fit=crop", // Purple ice cream
+    "Strawberry": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&h=300&fit=crop" // Strawberry ice cream
+  };
+
   useEffect(() => {
     const fetchFlavors = async () => {
       try {
-        const response = await fetch('/api/flavors');
-        if (!response.ok) {
-          throw new Error('Failed to fetch flavors');
-        }
-        const data = await response.json();
+        console.log('Fetching flavors from /api/flavors...');
 
-        // Apply limit if specified
-        const displayFlavors = limit ? data.slice(0, limit) : data;
+        const response = await fetch('/api/flavors', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        console.log('Response status:', response.status);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Response error:', errorText);
+          throw new Error(`Server error: ${response.status} - ${errorText}`);
+        }
+
+        const data = await response.json();
+        console.log('Received flavors:', data);
+
+        if (!Array.isArray(data)) {
+          throw new Error(`Invalid data format: expected array, got ${typeof data}`);
+        }
+
+        // Add images to flavors
+        const flavorsWithImages = data.map(flavor => ({
+          ...flavor,
+          image: flavorImages[flavor.name] || "https://images.unsplash.com/photo-1488900128323-21503983a07e"
+        }));
+
+        const displayFlavors = limit ? flavorsWithImages.slice(0, limit) : flavorsWithImages;
         setFlavors(displayFlavors);
+        setError(null);
+
       } catch (err) {
+        console.error('Fetch error:', err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -28,35 +64,131 @@ function FlavorList({ limit, showViewAll = false }) {
     fetchFlavors();
   }, [limit]);
 
-  if (loading) return <div>Loading flavors...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
+        <div className="loading text-center">
+          <p className="text-xl text-pink-700">Loading delicious flavors...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
+        <div className="error text-center">
+          <p className="text-xl text-red-600 mb-4">Error loading flavors: {error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (flavors.length === 0) {
+    return (
+      <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
+        <div className="no-flavors text-center">
+          <p className="text-xl text-pink-700">No flavors available at this time.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="flavor-list">
+    <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
       {!limit && (
-        <div className="page-header">
-          <h2>Our Delicious Flavors</h2>
+        <div className="page-header text-center mb-8">
+          <h1 className="text-4xl font-bold text-pink-700 mb-4">Our Delicious Flavors 🍧</h1>
+          <p className="text-lg text-gray-600">Choose from our selection of authentic Italian ice flavors</p>
         </div>
       )}
 
-      <div className="flavors-grid">
-        {flavors.map(flavor => (
-          <div key={flavor.id} className="flavor-card">
-            <h3>{flavor.name}</h3>
-            <p className="flavor-description">{flavor.description}</p>
-            <p className="price">${(flavor.price_cents / 100).toFixed(2)}</p>
-            <div className="flavor-info">
-              <span className="availability">
-                {flavor.available ? '✅ Available' : '❌ Unavailable'}
-              </span>
+      {limit && (
+        <h2 className="text-4xl font-bold text-center mb-8 text-pink-700">
+          Featured Flavors 🍧
+        </h2>
+      )}
+
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-4xl">
+          {flavors.map(flavor => (
+            <div key={flavor.id} className={`flavor-card bg-white rounded-xl shadow-lg overflow-hidden max-w-xs w-full hover:shadow-xl transition-all duration-300 ${!flavor.available && !limit ? 'opacity-90' : ''}`}>
+              <div className="flavor-image relative">
+                <img
+                  src={flavor.image}
+                  alt={flavor.name}
+                  className={`w-full h-20 object-cover transition-all duration-300 ${!flavor.available && !limit ? 'grayscale' : ''}`}
+                />
+                {!flavor.available && !limit && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-800/70 to-gray-900/70 flex items-center justify-center">
+                    <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
+                      TEMPORARILY UNAVAILABLE
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="flavor-content p-4">
+                {limit ? (
+                  // Simplified home page version - just name
+                  <div className="text-center">
+                    <h3 className="text-lg font-semibold text-gray-800 tracking-wide">
+                      {flavor.name}
+                    </h3>
+                  </div>
+                ) : (
+                  // Full flavor page version with all details
+                  <>
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className={`text-lg font-semibold tracking-wide ${flavor.available ? 'text-gray-800' : 'text-gray-500'}`}>
+                        {flavor.name}
+                      </h3>
+                      <div className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border ${
+                        flavor.available
+                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                          : 'bg-gray-50 text-gray-600 border-gray-200'
+                      }`}>
+                        {flavor.available ? 'In Stock' : 'Out of Stock'}
+                      </div>
+                    </div>
+                    <p className={`flavor-description mb-4 text-sm leading-relaxed ${flavor.available ? 'text-gray-600' : 'text-gray-400'}`}>
+                      {flavor.description}
+                    </p>
+                    <div className="flavor-footer flex justify-between items-center pt-2 border-t border-gray-100">
+                      <span className={`price text-xl font-bold tracking-tight ${flavor.available ? 'text-pink-600' : 'text-gray-400'}`}>
+                        ${(flavor.price_cents / 100).toFixed(2)}
+                      </span>
+                      {flavor.available ? (
+                        <div className="flex items-center text-emerald-600 text-sm font-medium">
+                          <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full mr-2 animate-pulse"></div>
+                          Available Now
+                        </div>
+                      ) : (
+                        <div className="flex items-center text-gray-500 text-sm font-medium">
+                          <div className="w-2.5 h-2.5 bg-gray-400 rounded-full mr-2"></div>
+                          Check Back Soon
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {showViewAll && (
-        <div className="view-all-section">
-          <Link to="/flavors" className="view-all-btn">
+        <div className="view-all-section text-center mt-8">
+          <Link
+            to="/flavors"
+            className="view-all-btn bg-pink-600 text-white px-8 py-3 rounded-lg hover:bg-pink-700 transition-colors inline-block font-medium"
+          >
             View All Flavors →
           </Link>
         </div>

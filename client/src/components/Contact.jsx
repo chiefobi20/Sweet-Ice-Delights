@@ -216,7 +216,7 @@ function Contact() {
   return (
     <div className="contact">
       <div className="page-header">
-        <h1>Contact Sweet Ice Delights</h1>
+        <h1>Contact Us</h1>
       </div>
 
       <div className="contact-content">
@@ -239,7 +239,7 @@ function Contact() {
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="name">Full Name *</label>
+                    <label htmlFor="name">Name *</label>
                     <input
                       type="text"
                       id="name"
@@ -413,6 +413,24 @@ function Contact() {
                   <p>123 Gelato Street<br/>Sweet City, SC 12345</p>
                   <p className="contact-note">Open daily!</p>
                 </div>
+
+                <div className="quick-contact-card">
+                  <div className="contact-icon">📱</div>
+                  <h4>Follow Us On Instagram</h4>
+                  <a href="https://instagram.com/sweeticedelights" className="contact-link" target="_blank" rel="noopener noreferrer">
+                    @sweeticedelights
+                  </a>
+                  <p className="contact-note">Daily updates</p>
+                </div>
+
+                <div className="quick-contact-card">
+                  <div className="contact-icon">👍</div>
+                  <h4>Like Us On Facebook</h4>
+                  <a href="https://facebook.com/sweeticedelights" className="contact-link" target="_blank" rel="noopener noreferrer">
+                    Sweet Ice Delights
+                  </a>
+                  <p className="contact-note">Events & specials</p>
+                </div>
               </div>
             </div>
           </section>
@@ -423,3 +441,232 @@ function Contact() {
 }
 
 export default Contact;
+
+// Add these styles to the existing CSS or create a separate CSS file
+const calendarStyles = `
+.calendar-popup {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-header h4 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.legend-color.available {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.legend-color.selected {
+  background: #28a745;
+  border: 1px solid #1e7e34;
+}
+
+.legend-color.unavailable {
+  background: #6c757d;
+  border: 1px solid #495057;
+}
+
+.calendar-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.calendar-month {
+  text-align: center;
+}
+
+.calendar-month h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-weekdays div {
+  padding: 0.5rem;
+  font-weight: 600;
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.calendar-day.empty {
+  visibility: hidden;
+}
+
+.calendar-day.available {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #495057;
+}
+
+.calendar-day.available:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  transform: scale(1.05);
+}
+
+.calendar-day.selected {
+  background: #28a745;
+  color: white;
+  border: 1px solid #1e7e34;
+  font-weight: 600;
+}
+
+.calendar-day.selected:hover {
+  background: #218838;
+}
+
+.calendar-day.unavailable {
+  background: #6c757d;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.calendar-toggle-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.calendar-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.selected-dates-display {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.selected-dates-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.selected-date-tag {
+  background: #28a745;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.remove-date-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-date-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .calendar-legend {
+    gap: 1rem;
+  }
+
+  .legend-item {
+    font-size: 0.8rem;
+  }
+
+  .calendar-day {
+    font-size: 0.8rem;
+  }
+}
+`;
+
+// Add the styles to the document head
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = calendarStyles;
+  document.head.appendChild(styleSheet);
+}

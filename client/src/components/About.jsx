@@ -32,6 +32,7 @@ function About() {
         </section>
 
         {/* Values Section */}
+        <br></br>
         <section className="about-section">
           <h2>What Makes Us Special</h2>
           <div className="values-grid">
@@ -74,6 +75,7 @@ function About() {
         </section>
 
         {/* Team Section */}
+        <br></br>
         <section className="about-section">
           <h2>Meet Our Team</h2>
           <p>
@@ -92,10 +94,12 @@ function About() {
             Come visit us today or order online for pickup. We can't wait to serve you
             the most delicious Italian ice you've ever tasted!
           </p>
+          <br></br>
           <div className="cta-buttons">
             <Link to="/flavors" className="cta-button primary">
               View Our Flavors
             </Link>
+            <br></br>
             <Link to="/contact" className="cta-button secondary">
               Get in Touch
             </Link>

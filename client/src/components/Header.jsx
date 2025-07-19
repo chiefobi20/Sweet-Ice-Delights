@@ -1,44 +1,32 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom'
+import HoursDisplay from './HoursDisplay'
 
 function Header() {
-  const { user, logout } = useAuth();
-
   return (
     <header className="header">
-      <div className="header-container">
+      <div className="header-content">
         <div className="logo">
-          <span className="logo-icon">🍧</span>
-          Sweet Ice Delights
+          <Link to="/">
+            <h1>🍧 Sweet Ice Delights</h1>
+          </Link>
         </div>
 
-        <nav className="main-nav">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/flavors" className="nav-link">Flavors</Link>
-          <Link to="/about" className="nav-link">About</Link>
-          <Link to="/contact" className="nav-link">Contact</Link>
-          <Link to="/hours" className="nav-link">Hours</Link>
+        <nav className="nav">
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/flavors">Flavors</Link></li>
+            <li><Link to="/hours">Hours</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+          </ul>
         </nav>
 
-        <div className="header-actions">
-          {user ? (
-            <>
-              <span className="welcome-text">Welcome, {user.name || user.email}!</span>
-              <div className="auth-links">
-                <button onClick={logout} className="auth-link logout-btn">
-                  Logout
-                </button>
-              </div>
-            </>
-          ) : (
-            <div className="auth-links">
-              <Link to="/login" className="auth-link">Login</Link>
-            </div>
-          )}
+        <div className="header-hours">
+          <HoursDisplay compact={true} />
         </div>
       </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

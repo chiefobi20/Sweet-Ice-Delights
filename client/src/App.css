@@ -6,44 +6,81 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: Arial, sans-serif;
   line-height: 1.6;
-  color: #2c3e50;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-    url('https://images.unsplash.com/photo-1551024506-0bccd828d307?w=1920&h=1080&fit=crop&crop=center') center/cover fixed,
-    linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  min-height: 100vh;
-  background-attachment: fixed;
+  color: #333;
+  background: #f4f4f4;
 }
 
-#root {
-  max-width: 100%;
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+.header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
   margin: 0;
   padding: 0;
 }
 
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
-/* Add subtle ice crystal overlay */
-.app::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(173, 216, 230, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(135, 206, 235, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(176, 224, 230, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: -1;
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #3498db;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* Typography */
@@ -57,2491 +94,3114 @@ h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
 h3 { font-size: 1.5rem; }
 
-p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-/* Page Header Styles */
-.page-header {
-  background: white;
-  padding: 2rem;
-  border-bottom: 1px solid #e8ecf4;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.page-header h1 {
-  color: #2c3e50;
-  margin: 0;
-  font-size: 2.2rem;
-  font-weight: 700;
-}
-
-.back-home-btn {
-  color: #667eea;
-  text-decoration: none;
-  padding: 0.8rem 1.5rem;
-  border: 2px solid #667eea;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.back-home-btn:hover {
-  background: #667eea;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-}
-
-/* Button Styles */
-.cta-button {
-  padding: 1rem 2rem;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-block;
-  border: 2px solid transparent;
-  cursor: pointer;
-  font-size: 1rem;
-  text-align: center;
-}
-
-.cta-button.primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-}
-
-.cta-button.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-}
-
-.cta-button.secondary {
-  background: transparent;
-  color: #667eea;
-  border-color: #667eea;
-}
-
-.cta-button.secondary:hover {
-  background: #667eea;
-  color: white;
-  transform: translateY(-2px);
-}
-
 /* Card Styles */
 .card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
+  background: white;
   padding: 2rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-}
-
-/* Section Spacing */
-section {
-  margin: 3rem 0;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Responsive Images */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-}
-
-/* Loading States */
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem;
-  font-size: 1.2rem;
-  color: #6c757d;
-}
-
-/* Error States */
-.error-message {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  margin: 1rem 0;
-  text-align: center;
-  font-weight: 500;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
-
-/* Focus States */
-*:focus {
-  outline: 2px solid #667eea;
-  outline-offset: 2px;
-}
-
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Header Styles */
-.header {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
-  color: white;
-  padding: 1rem 0;
+  border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  margin-bottom: 2rem;
 }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-}
-
-/* Logo */
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
-  padding: 0.5rem;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo-icon {
-  font-size: 2rem;
-}
-
-/* Main Navigation */
-.main-nav {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-link {
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #3498db;
   color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.nav-link:hover {
-  background: rgba(255,255,255,0.1);
-  transform: translateY(-1px);
-}
-
-.nav-link.active {
-  background: rgba(255,255,255,0.2);
-}
-
-/* Header Actions */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-/* Welcome Text */
-.welcome-text {
-  color: rgba(255,255,255,0.9);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-/* Cart Link */
-.cart-link {
-  position: relative;
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.1);
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.cart-link:hover {
-  background: rgba(255,255,255,0.2);
-  transform: translateY(-1px);
-}
-
-/* Auth Links */
-.auth-links {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.auth-link {
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: 2px solid rgba(255,255,255,0.3);
-  transition: all 0.3s ease;
-  font-weight: 500;
-  background: transparent;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-}
-
-.auth-link:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.5);
-  transform: translateY(-1px);
-}
-
-.logout-btn {
-  background: rgba(231, 76, 60, 0.8);
-  border-color: #e74c3c;
-}
-
-.logout-btn:hover {
-  background: #e74c3c;
-  border-color: #c0392b;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 1rem;
-  }
-
-  .main-nav {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .header-actions {
-    order: 2;
-    gap: 1rem;
-  }
-
-  .welcome-text {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-nav {
-    gap: 0.5rem;
-  }
-
-  .nav-link {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-  }
-
-  .auth-links {
-    gap: 0.5rem;
-  }
-
-  .auth-link {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-  }
-}
-
-/* Enhanced Home Section with Background */
-.home {
-  flex: 1;
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  margin-top: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.flavor-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-/* Enhanced Cards with Glass Effect */
-.card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.flavor-card {
-  background:
-    linear-gradient(135deg, rgba(255, 234, 167, 0.9), rgba(250, 177, 160, 0.9), rgba(253, 121, 168, 0.9), rgba(162, 155, 254, 0.9)),
-    url('https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop') center/cover;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-  border: 3px solid transparent;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(5px);
-}
-
-.flavor-card:hover {
-  transform: translateY(-10px) rotate(1deg);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-  border-color: #e74c3c;
-}
-
-.flavor-image {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 20px 20px 0 0;
-  background: rgba(255,255,255,0.1);
-}
-
-.flavor-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.flavor-card:hover .flavor-image img {
-  transform: scale(1.05);
-}
-
-.flavor-content {
-  padding: 2rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.flavor-card h3 {
-  color: #2c3e50;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-}
-
-.flavor-description {
-  color: #34495e;
-  font-size: 0.95rem;
-  margin: 1rem 0;
-  line-height: 1.4;
-  flex: 1;
-}
-
-.price {
-  color: #2c3e50;
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin: 1rem 0;
-}
-
-.add-to-cart-btn {
-  width: 100%;
+  border-radius: 5px;
   border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+/* Footer */
+.footer {
+  background: #2c3e50;
+  color: white;
+  padding: 2rem 0 1rem;
   margin-top: auto;
 }
 
-/* Placeholder for missing images */
-.flavor-card:not(:has(.flavor-image)) .flavor-content {
-  padding: 2rem;
-}
-
-/* Hero Section with Ice Background */
-.hero {
-  text-align: center;
-  padding: 4rem 2rem;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?w=1200&h=600&fit=crop') center/cover;
-  border-radius: 20px;
-  margin-bottom: 4rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.hero h1 {
-  font-size: 3.5rem;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-}
-
-.tagline {
-  font-size: 1.5rem;
-  color: #e74c3c;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-}
-
-.description {
-  font-size: 1.2rem;
-  color: #34495e;
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
-  text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Consolidated Button Styles */
-.cta-button, .add-to-cart-btn, .view-all-btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-block;
-  border: 2px solid transparent;
-  cursor: pointer;
-}
-
-.cta-button.primary, .add-to-cart-btn {
-  background: linear-gradient(45deg, #e74c3c, #f39c12);
-  color: white;
-  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-}
-
-.cta-button.primary:hover, .add-to-cart-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-}
-
-.cta-button.secondary {
-  background: transparent;
-  color: #e74c3c;
-  border-color: #e74c3c;
-}
-
-.cta-button.secondary:hover {
-  background: #e74c3c;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.view-all-btn {
-  background: linear-gradient(45deg, #4ecdc4, #45b7d1);
-  color: white;
-}
-
-.view-all-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
-}
-
-/* Features Section with Ice Backgrounds */
-.features {
-  margin: 4rem 0;
-  padding: 3rem 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1488900128323-21503983a07e?w=1200&h=400&fit=crop') center/cover;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 2rem;
-}
-
-.feature-card {
-  text-align: center;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-}
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.feature-card p {
-  color: #34495e;
-  line-height: 1.5;
-}
-
-/* Popular Flavors with Background */
-.popular-flavors {
-  margin: 4rem 0;
-  text-align: center;
-  padding: 3rem 2rem;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=1200&h=400&fit=crop') center/cover;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.popular-flavors h2 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-.popular-flavors > p {
-  color: #34495e;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-}
-
-.view-all-section {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-/* CTA Section with Colorful Ice Background */
-.cta-section {
-  background:
-    linear-gradient(rgba(44, 62, 80, 0.9), rgba(52, 73, 94, 0.9)),
-    url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=1200&h=400&fit=crop') center/cover;
-  color: white;
-  padding: 4rem 2rem;
-  border-radius: 20px;
-  text-align: center;
-  margin: 4rem 0;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.cta-content h2 {
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.cta-content p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Enhanced Flavor Cards */
-.flavor-description {
-  color: #34495e;
-  font-size: 0.95rem;
-  margin: 1rem 0;
-  line-height: 1.4;
-}
-
-.add-to-cart-btn {
-  width: 100%;
-  border: none;
-}
-
-.add-to-cart-btn:disabled {
-  background: #bdc3c7;
-  cursor: not-allowed;
-}
-
-/* Page Navigation */
-.page-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e74c3c;
-}
-
-.back-home-btn {
-  color: #e74c3c;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 2px solid #e74c3c;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.back-home-btn:hover {
-  background: #e74c3c;
-  color: white;
-  transform: translateY(-1px);
-}
-
-/* Notifications */
-.cart-notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #27ae60;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  z-index: 1000;
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* Loading and Error States */
-.loading {
-  text-align: center;
-  padding: 2rem;
-  font-size: 1.1rem;
-  color: #34495e;
-}
-
-/* Consolidated Mobile Responsive */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-actions, .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .cta-button {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .page-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .page-header h2 {
-    margin: 0;
-  }
-}
-
-/* Success Message */
-.success-message {
-  text-align: center;
-  padding: 2rem;
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
-  border-radius: 10px;
-  margin: 2rem 0;
-}
-
-.success-message h2 {
-  color: #155724;
-  margin-bottom: 1rem;
-}
-
-.success-message p {
-  color: #155724;
-  margin-bottom: 2rem;
-}
-
-.success-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.home-btn, .orders-btn, .browse-flavors-btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.home-btn {
-  background: #e74c3c;
-  color: white;
-  border: 2px solid #e74c3c;
-}
-
-.home-btn:hover {
-  background: #c0392b;
-  transform: translateY(-2px);
-}
-
-.orders-btn {
-  background: transparent;
-  color: #e74c3c;
-  border: 2px solid #e74c3c;
-}
-
-.orders-btn:hover {
-  background: #e74c3c;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.browse-flavors-btn {
-  background: #3498db;
-  color: white;
-  border: 2px solid #3498db;
-}
-
-.browse-flavors-btn:hover {
-  background: #2980b9;
-  transform: translateY(-2px);
-}
-
-/* Empty Cart */
-.empty-cart {
-  text-align: center;
-  padding: 2rem;
-}
-
-.empty-cart p {
-  margin-bottom: 1.5rem;
-  color: #7f8c8d;
-  font-size: 1.1rem;
-}
-
-/* Cart Actions */
-.cart-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.cart-actions button {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.cart-actions button:hover {
-  transform: translateY(-2px);
-}
-
-/* Empty Orders */
-.empty-orders {
-  text-align: center;
-  padding: 2rem;
-}
-
-.empty-orders p {
-  margin-bottom: 1.5rem;
-  color: #7f8c8d;
-  font-size: 1.1rem;
-}
-
-/* Order History Styling */
-.order-history {
-  flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.orders-list {
-  display: grid;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.order-card {
-  background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
-
-.order-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.order-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
-}
-
-.order-header h3 {
-  color: #2c3e50;
-  margin: 0;
-}
-
-.status {
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.status.pending {
-  background: #fff3cd;
-  color: #856404;
-}
-
-.status.completed {
-  background: #d4edda;
-  color: #155724;
-}
-
-.status.cancelled {
-  background: #f8d7da;
-  color: #721c24;
-}
-
-.order-details {
-  margin: 1rem 0;
-}
-
-.order-details p {
-  margin: 0.5rem 0;
-  color: #7f8c8d;
-}
-
-.view-order-btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #3498db;
-  color: white;
-  text-decoration: none;
-  border-radius: 20px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.view-order-btn:hover {
-  background: #2980b9;
-  transform: translateY(-1px);
-}
-
-/* About Page Styles */
-.about {
-  flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  margin-top: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  backdrop-filter: blur(10px);
-}
-
-.about-content {
-  margin-top: 2rem;
-}
-
-.about-hero {
-  background:
-    linear-gradient(rgba(231, 76, 60, 0.1), rgba(243, 156, 18, 0.1)),
-    url('https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=1200&h=400&fit=crop') center/cover;
-  border-radius: 20px;
-  padding: 3rem 2rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.about-hero-content h2 {
-  color: #e74c3c;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.lead {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #2c3e50;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.about-section {
-  margin: 3rem 0;
-  padding: 2rem 0;
-}
-
-.about-section h2 {
-  color: #2c3e50;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.about-section p {
-  color: #34495e;
-  line-height: 1.7;
-  font-size: 1.1rem;
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  text-align: center;
-}
-
-/* Values Grid */
-.values-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  margin-top: 2rem;
 }
 
-.value-card {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-.value-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  border-color: #e74c3c;
-}
-
-.value-icon {
-  font-size: 3rem;
+.footer-section h3,
+.footer-section h4 {
   margin-bottom: 1rem;
+  color: #3498db;
 }
 
-.value-card h3 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.value-card p {
-  color: #7f8c8d;
-  line-height: 1.5;
-  font-size: 0.95rem;
-  text-align: left;
-  margin: 0;
-}
-
-/* Location Info */
-.location-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.location-card {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  color: white;
-  border-radius: 15px;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-  transition: all 0.3s ease;
-}
-
-.location-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
-}
-
-.location-card h3 {
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.location-card p {
-  margin: 0;
-  line-height: 1.6;
-  text-align: left;
-  color: rgba(255,255,255,0.9);
-}
-
-.location-card strong {
-  color: white;
-}
-
-/* About CTA */
-.about-cta {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
-  color: white;
-  border-radius: 20px;
-  padding: 3rem 2rem;
-  text-align: center;
-  margin: 3rem 0;
-}
-
-.about-cta h2 {
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.about-cta p {
-  color: rgba(255,255,255,0.9);
-  margin-bottom: 2rem;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Contact Page Styles */
-.contact {
-  flex: 1;
-  max-width: 1400px;
-  margin: 0 auto;
+.footer-section ul {
+  list-style: none;
   padding: 0;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  margin-top: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  backdrop-filter: blur(10px);
 }
 
-.contact-content {
-  padding: 0 2rem 2rem;
+.footer-section ul li {
+  margin-bottom: 0.5rem;
 }
 
-.contact-hero {
-  background:
-    linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%),
-    url('https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=1200&h=400&fit=crop') center/cover;
-  color: white;
-  padding: 4rem 2rem;
-  text-align: center;
-  margin-bottom: 4rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.hero-content h2 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  color: white;
-}
-
-.lead {
-  font-size: 1.3rem;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  opacity: 0.95;
-}
-
-/* Contact Main Layout - Centered with !important */
-.contact-main-centered {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 3rem !important;
-  max-width: 900px !important;
-  margin: 0 auto !important;
-}
-
-/* Contact Form Section with higher specificity */
-.contact-form-section.card {
-  width: 100% !important;
-  max-width: 800px !important;
-  background: white !important;
-  border-radius: 20px !important;
-  padding: 2rem !important;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1) !important;
-  border: 1px solid #e8ecf4 !important;
-}
-
-.contact-form-section h3 {
-  color: #2c3e50 !important;
-  font-size: 1.8rem !important;
-  margin-bottom: 2rem !important;
-  font-weight: 600 !important;
-  text-align: center !important;
-}
-
-.contact-form {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1.5rem !important;
-}
-
-.form-row {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 1.5rem !important;
-}
-
-.form-group {
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.form-group label {
-  font-weight: 600 !important;
-  color: #2c3e50 !important;
-  margin-bottom: 0.5rem !important;
-  font-size: 0.95rem !important;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 1rem !important;
-  border: 2px solid #e8ecf4 !important;
-  border-radius: 12px !important;
-  font-size: 1rem !important;
-  transition: all 0.3s ease !important;
-  font-family: inherit !important;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.submit-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 1.2rem 2rem;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-  width: 100%;
-  max-width: 300px;
-  align-self: center;
-}
-
-.submit-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.submit-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-/* Scheduling Section */
-.scheduling-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 20px;
-  padding: 3rem;
-  border: 1px solid #e8ecf4;
-}
-
-.scheduling-section h3 {
-  color: #2c3e50;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.scheduling-section > p {
-  color: #6c757d;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-}
-
-.calendar-placeholder {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
-
-.calendar-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.calendar-placeholder h4 {
-  color: #2c3e50;
-  margin-bottom: 2rem;
-  font-size: 1.3rem;
-}
-
-.time-slots {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.time-slot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 10px;
-  border: 2px solid #e8ecf4;
-  transition: all 0.3s ease;
-}
-
-.time-slot.available {
-  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-  border-color: #28a745;
-  cursor: pointer;
-}
-
-.time-slot.available:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
-}
-
-.time-slot.booked {
-  background: #f8d7da;
-  border-color: #dc3545;
-  opacity: 0.7;
-}
-
-.time-slot .date {
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-.time-slot .time {
-  color: #6c757d;
-}
-
-.schedule-btn {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.schedule-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
-}
-
-.schedule-note {
-  font-size: 0.9rem;
-  color: #6c757d;
-  font-style: italic;
-}
-
-/* Contact Info Section */
-.contact-info-section {
-  margin: 4rem 0;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.contact-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2.5rem;
-  text-align: center;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-  border: 1px solid #e8ecf4;
-  transition: all 0.3s ease;
-}
-
-.contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-}
-
-.contact-icon {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.contact-card h3 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.contact-link {
-  color: #667eea;
+.footer-section a {
+  color: #bdc3c7;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
-.contact-link:hover {
-  color: #764ba2;
-  text-decoration: underline;
+.footer-section a:hover {
+  color: #3498db;
 }
 
-.contact-note {
-  color: #6c757d;
-  font-size: 0.95rem;
+.footer-bottom {
+  text-align: center;
+  padding-top: 1rem;
   margin-top: 1rem;
-  line-height: 1.4;
-}
-
-/* Social Media Section */
-.social-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 25px;
-  padding: 4rem 3rem;
-  text-align: center;
-  margin: 4rem 0;
-}
-
-.social-content h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.social-content > p {
-  font-size: 1.2rem;
-  margin-bottom: 3rem;
-  opacity: 0.9;
-}
-
-.social-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.social-link {
-  background: rgba(255,255,255,0.1);
-  border: 2px solid rgba(255,255,255,0.2);
-  border-radius: 20px;
-  padding: 2rem;
-  text-decoration: none;
-  color: white;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  text-align: left;
-}
-
-.social-link:hover {
-  background: rgba(255,255,255,0.2);
-  border-color: rgba(255,255,255,0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.social-icon {
-  font-size: 3rem;
-  flex-shrink: 0;
-}
-
-.social-info span {
-  font-weight: 700;
-  font-size: 1.3rem;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.social-info p {
-  margin: 0;
-  font-size: 1rem;
-  opacity: 0.9;
-  line-height: 1.4;
-}
-
-/* Success Message */
-.success-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-  padding: 2rem;
-}
-
-.success-card {
-  background: white;
-  border-radius: 25px;
-  padding: 4rem 3rem;
-  text-align: center;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-  border: 1px solid #e8ecf4;
-  max-width: 600px;
-}
-
-.success-icon {
-  font-size: 4rem;
-  margin-bottom: 2rem;
-}
-
-.success-card h2 {
-  color: #28a745;
-  margin-bottom: 1.5rem;
-  font-size: 2.2rem;
-  font-weight: 700;
-}
-
-.success-card p {
-  color: #6c757d;
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.success-card a {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.success-card a:hover {
-  text-decoration: underline;
-}
-
-/* Calendar Styles */
-.calendar-toggle-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  width: auto;
-  display: inline-block;
-}
-
-.calendar-toggle-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-}
-
-.selected-dates-display {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 10px;
-  border: 1px solid #e8ecf4;
-}
-
-.selected-dates-display p {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-.selected-dates-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.selected-date-tag {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.remove-date-btn {
-  background: rgba(255,255,255,0.3);
-  border: none;
-  color: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-}
-
-.remove-date-btn:hover {
-  background: rgba(255,255,255,0.5);
-}
-
-.calendar-popup {
-  background: white;
-  border: 2px solid #e8ecf4;
-  border-radius: 20px;
-  padding: 2rem;
-  margin-top: 1rem;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-  position: relative;
-  z-index: 100;
-  width: 100%;
-  max-width: none;
-  display: block !important;
-}
-
-.calendar-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.calendar-header h4 {
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.calendar-header p {
-  color: #6c757d;
-  margin: 0;
-  font-size: 1rem;
-}
-
-.calendar-legend {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 12px;
-  flex-wrap: wrap;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2c3e50;
-}
-
-.legend-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  border: 2px solid #ddd;
-  flex-shrink: 0;
-}
-
-.legend-color.available {
-  background: white;
-  border-color: #28a745;
-}
-
-.legend-color.selected {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-  border-color: #28a745;
-}
-
-.legend-color.unavailable {
-  background: #6c757d;
-  border-color: #6c757d;
-}
-
-.calendar-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  width: 100%;
-}
-
-.calendar-month {
-  background: #f8f9fa;
-  border-radius: 15px;
-  padding: 1.5rem;
-  border: 1px solid #e8ecf4;
-  width: 100%;
-}
-
-.calendar-month h4 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.calendar-weekdays div {
-  text-align: center;
-  font-weight: 600;
-  color: #6c757d;
-  font-size: 0.9rem;
-  padding: 0.5rem;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
-  padding: 0.5rem;
-}
-
-.calendar-day {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  font-size: 0.9rem;
-  user-select: none;
-  position: relative;
-  min-height: 40px;
-  min-width: 40px;
-}
-
-.calendar-day.empty {
-  cursor: default;
-  pointer-events: none;
-}
-
-.calendar-day.available {
-  background: white;
-  border-color: #28a745;
-  color: #2c3e50;
-  cursor: pointer;
-}
-
-.calendar-day.available:hover {
-  background: #e8f5e8;
-  transform: scale(1.1);
-  z-index: 1;
-}
-
-.calendar-day.selected {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-  color: white;
-  border-color: #28a745;
-  transform: scale(1.05);
-  cursor: pointer;
-}
-
-.calendar-day.selected:hover {
-  transform: scale(1.15);
-  z-index: 1;
-}
-
-.calendar-day.unavailable {
-  background: #6c757d;
-  color: white;
-  cursor: not-allowed;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.calendar-day.unavailable:hover {
-  transform: none;
-}
-
-/* Quick Contact Section */
-.contact .quick-contact-section.card {
-  width: 100% !important;
-  max-width: 800px !important;
-  background: white !important;
-  border-radius: 20px !important;
-  padding: 2rem !important;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1) !important;
-  border: 1px solid #e8ecf4 !important;
-}
-
-.contact .quick-contact-section h3 {
-  color: #2c3e50 !important;
-  font-size: 1.8rem !important;
-  margin-bottom: 1rem !important;
-  font-weight: 600 !important;
-  text-align: center !important;
-}
-
-.contact .quick-contact-cards {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-  gap: 1.5rem !important;
-}
-
-.contact .quick-contact-card {
-  background: white !important;
-  border-radius: 15px !important;
-  padding: 2rem !important;
-  text-align: center !important;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
-  border: 1px solid #e8ecf4 !important;
-  transition: all 0.3s ease !important;
-}
-
-.contact .quick-contact-card .contact-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.contact .quick-contact-card h4 {
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.contact .quick-contact-card .contact-link {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-.contact .quick-contact-card .contact-link:hover {
-  color: #764ba2;
-  text-decoration: underline;
-}
-
-.contact .quick-contact-card .contact-note {
-  color: #6c757d;
-  font-size: 0.9rem;
-  margin: 0.5rem 0 0 0;
-}
-
-.contact .quick-contact-card p {
-  color: #6c757d;
-  margin: 0.5rem 0;
-  line-height: 1.4;
-}
-
-/* Success Page Enhancements */
-.selected-dates-summary {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  border: 1px solid #e8ecf4;
-}
-
-.selected-dates-summary h4 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.selected-dates-summary ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.selected-dates-summary li {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  text-align: center;
+  border-top: 1px solid #34495e;
+  color: #bdc3c7;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .contact .contact-main-centered {
-    max-width: 100% !important;
-    padding: 0 1rem !important;
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  .contact .form-row {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
+  .nav ul {
+    gap: 1rem;
   }
 
-  .contact .quick-contact-cards {
-    grid-template-columns: 1fr !important;
-  }
-
-  .contact .hero-content h2 {
-    font-size: 2.5rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .calendar-day {
-    font-size: 0.8rem;
-    min-height: 35px;
-    min-width: 35px;
-  }
-
-  .calendar-month {
-    padding: 1rem;
-  }
-
-  .calendar-popup {
-    padding: 1rem;
-  }
-}
-
-.main-content {
-  flex: 1;
-  min-height: calc(100vh - 140px); /* Adjust based on header/footer height */
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Hours Page Background */
-.hours {
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  margin-top: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  backdrop-filter: blur(10px);
-}
-
-.hours-hero {
-  background:
-    linear-gradient(rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1)),
-    url('https://images.unsplash.com/photo-1551024601-bec78aea704b?w=1200&h=400&fit=crop') center/cover;
-  border-radius: 20px;
-  padding: 3rem 2rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-/* Flavors Page Background */
-.flavor-list {
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  margin: 2rem auto;
-  max-width: 1200px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  backdrop-filter: blur(10px);
-}
-
-/* Enhanced Cards with Glass Effect */
-.card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.flavor-card {
-  background:
-    linear-gradient(135deg, rgba(255, 234, 167, 0.9), rgba(250, 177, 160, 0.9), rgba(253, 121, 168, 0.9), rgba(162, 155, 254, 0.9)),
-    url('https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop') center/cover;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-  border: 3px solid transparent;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(5px);
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  .home, .about, .contact, .hours, .flavor-list {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-}
-
-/* Mobile Responsive Background Adjustments */
-@media (
-/* Ensure pages don't have conflicting layouts */
-.contact,
-.flavors,
-.about,
-.hours,
-.cart,
-.login,
-.register,
-.orders {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Image Carousel Section */
-.image-carousel-section {
-  margin: 4rem 0;
-  text-align: center;
-}
-
-.image-carousel-section h2 {
-  color: #2c3e50;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: 700;
-}
-
-.image-carousel {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-}
-
-.carousel-track {
-  display: flex;
-  animation: scroll 20s linear infinite;
-  width: calc(400px * 16); /* 8 items × 2 for seamless loop */
-}
-
-.carousel-item {
-  flex: 0 0 400px;
-  margin-right: 2rem;
-  text-align: center;
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.carousel-item:hover {
-  transform: translateY(-5px);
-}
-
-.carousel-item img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 15px 15px 0 0;
-}
-
-.carousel-item p {
-  padding: 1rem;
-  font-weight: 600;
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin: 0;
-  background: linear-gradient(135deg, #ffeaa7, #fab1a0);
-}
-
-/* Duplicate items for seamless loop */
-.carousel-track::after {
-  content: '';
-  display: flex;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-400px * 8 - 2rem * 8));
-  }
-}
-
-/* Pause animation on hover */
-.image-carousel:hover .carousel-track {
-  animation-play-state: paused;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .carousel-item {
-    flex: 0 0 300px;
-  }
-
-  .carousel-track {
-    width: calc(300px * 16);
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-300px * 8 - 2rem * 8));
-    }
-  }
-
-  .image-carousel-section h2 {
+  h1 {
     font-size: 2rem;
   }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .carousel-item {
-    flex: 0 0 250px;
+  .nav ul {
+    gap: 0.5rem;
   }
 
-  .carousel-track {
-    width: calc(250px * 16);
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-250px * 8 - 2rem * 8));
-    }
+  .nav a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
   }
 }
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+

@@ -1,62 +1,60 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+// Centralized API service
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? '/api'
+  : '/api'; // Use proxy in development
 
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return token ? { Authorization: `Bearer ${token}` } : {};
-};
+class ApiService {
+  static async request(endpoint, options = {}) {
+    const url = `${API_BASE_URL}${endpoint}`;
 
-export const createOrder = async (orderData) => {
-  const response = await fetch(`${API_BASE_URL}/orders`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...getAuthHeaders()
-    },
-    body: JSON.stringify(orderData)
-  });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+      ...options,
+    };
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Failed to create order');
+    try {
+      console.log(`🔍 API Request: ${config.method || 'GET'} ${url}`);
+
+      const response = await fetch(url, config);
+
+      console.log(`📡 API Response: ${response.status} ${response.statusText}`);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log('✅ API Data:', data);
+
+      return data;
+    } catch (error) {
+      console.error(`❌ API Error for ${endpoint}:`, error);
+      throw error;
+    }
   }
 
-  return response.json();
-};
-
-export const fetchOrders = async () => {
-  const response = await fetch(`${API_BASE_URL}/orders`, {
-    headers: getAuthHeaders()
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch orders');
+  static async getFlavors() {
+    return this.request('/flavors');
   }
 
-  return response.json();
-};
-
-export const fetchOrderById = async (orderId) => {
-  const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
-    headers: getAuthHeaders()
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch order');
+  static async submitContact(contactData) {
+    return this.request('/contact', {
+      method: 'POST',
+      body: JSON.stringify(contactData),
+    });
   }
 
-  return response.json();
-};
-
-export const cancelOrder = async (orderId) => {
-  const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
-    method: 'DELETE',
-    headers: getAuthHeaders()
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Failed to cancel order');
+  static async testConnection() {
+    return this.request('/test');
   }
 
-  return response.json();
-};
+  static async getHealth() {
+    return this.request('/health');
+  }
+}
+
+export default ApiService;
