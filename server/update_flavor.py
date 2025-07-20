@@ -21,7 +21,7 @@ def update_flavor_availability(flavor_name, is_available):
 
 if __name__ == '__main__':
     # Example: Make Cherry unavailable
-    update_flavor_availability("Cherry", False)
+    # update_flavor_availability("Cherry", False)
 
     # Example: Make Lemon available again
-    update_flavor_availability("Blue Raspberry", True)
+    update_flavor_availability("Orange", True)

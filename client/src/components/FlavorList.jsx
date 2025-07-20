@@ -66,9 +66,11 @@ function FlavorList({ limit, showViewAll = false }) {
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
-        <div className="loading text-center">
-          <p className="text-xl text-pink-700">Loading delicious flavors...</p>
+      <div className="min-h-screen py-10 px-6">
+        <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 border-2 border-white/20 shadow-2xl max-w-4xl mx-auto">
+          <div className="loading text-center">
+            <p className="text-xl text-white">Loading delicious flavors...</p>
+          </div>
         </div>
       </div>
     );
@@ -76,15 +78,17 @@ function FlavorList({ limit, showViewAll = false }) {
 
   if (error) {
     return (
-      <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
-        <div className="error text-center">
-          <p className="text-xl text-red-600 mb-4">Error loading flavors: {error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors"
-          >
-            Retry
-          </button>
+      <div className="min-h-screen py-10 px-6">
+        <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 border-2 border-white/20 shadow-2xl max-w-4xl mx-auto">
+          <div className="error text-center">
+            <p className="text-xl text-white mb-4">Error loading flavors: {error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors"
+            >
+              Retry
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -92,107 +96,111 @@ function FlavorList({ limit, showViewAll = false }) {
 
   if (flavors.length === 0) {
     return (
-      <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
-        <div className="no-flavors text-center">
-          <p className="text-xl text-pink-700">No flavors available at this time.</p>
+      <div className="min-h-screen py-10 px-6">
+        <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 border-2 border-white/20 shadow-2xl max-w-4xl mx-auto">
+          <div className="no-flavors text-center">
+            <p className="text-xl text-white">No flavors available at this time.</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-pink-50 min-h-screen py-10 px-6">
-      {!limit && (
-        <div className="page-header text-center mb-8">
-          <h1 className="text-4xl font-bold text-pink-700 mb-4">Our Delicious Flavors 🍧</h1>
-          <p className="text-lg text-gray-600">Choose from our selection of authentic Italian ice flavors</p>
-        </div>
-      )}
+    <div className="min-h-screen py-10 px-6">
+      <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 border-2 border-white/20 shadow-2xl max-w-6xl mx-auto">
+        {!limit && (
+          <div className="page-header text-center mb-8">
+            <h1 className="text-4xl font-bold text-gray-200 mb-4">Our Delicious Flavors 🍧</h1>
+            <p className="text-lg text-gray-300 font-medium">Choose from our selection of authentic Italian ice flavors</p>
+          </div>
+        )}
 
-      {limit && (
-        <h2 className="text-4xl font-bold text-center mb-8 text-pink-700">
-          Featured Flavors 🍧
-        </h2>
-      )}
+        {limit && (
+          <h2 className="text-4xl font-bold text-center mb-8 text-gray-200">
+            Featured Flavors 🍧
+          </h2>
+        )}
 
-      <div className="flex justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-4xl">
-          {flavors.map(flavor => (
-            <div key={flavor.id} className={`flavor-card bg-white rounded-xl shadow-lg overflow-hidden max-w-xs w-full hover:shadow-xl transition-all duration-300 ${!flavor.available && !limit ? 'opacity-90' : ''}`}>
-              <div className="flavor-image relative">
-                <img
-                  src={flavor.image}
-                  alt={flavor.name}
-                  className={`w-full h-20 object-cover transition-all duration-300 ${!flavor.available && !limit ? 'grayscale' : ''}`}
-                />
-                {!flavor.available && !limit && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-800/70 to-gray-900/70 flex items-center justify-center">
-                    <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
-                      TEMPORARILY UNAVAILABLE
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="flavor-content p-4">
-                {limit ? (
-                  // Simplified home page version - just name
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold text-gray-800 tracking-wide">
-                      {flavor.name}
-                    </h3>
-                  </div>
-                ) : (
-                  // Full flavor page version with all details
-                  <>
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className={`text-lg font-semibold tracking-wide ${flavor.available ? 'text-gray-800' : 'text-gray-500'}`}>
-                        {flavor.name}
-                      </h3>
-                      <div className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border ${
-                        flavor.available
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                          : 'bg-gray-50 text-gray-600 border-gray-200'
-                      }`}>
-                        {flavor.available ? 'In Stock' : 'Out of Stock'}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-4xl">
+            {flavors.map(flavor => (
+              <div key={flavor.id} className={`flavor-card bg-white rounded-xl shadow-lg overflow-hidden max-w-xs w-full hover:shadow-xl transition-all duration-300 ${!flavor.available && !limit ? 'opacity-90' : ''}`}>
+                <div className="flavor-image relative">
+                  <img
+                    src={flavor.image}
+                    alt={flavor.name}
+                    className={`w-full h-20 object-cover transition-all duration-300 ${!flavor.available && !limit ? 'grayscale' : ''}`}
+                  />
+                  {!flavor.available && !limit && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-800/70 to-gray-900/70 flex items-center justify-center">
+                      <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
+                        TEMPORARILY UNAVAILABLE
                       </div>
                     </div>
-                    <p className={`flavor-description mb-4 text-sm leading-relaxed ${flavor.available ? 'text-gray-600' : 'text-gray-400'}`}>
-                      {flavor.description}
-                    </p>
-                    <div className="flavor-footer flex justify-between items-center pt-2 border-t border-gray-100">
-                      <span className={`price text-xl font-bold tracking-tight ${flavor.available ? 'text-pink-600' : 'text-gray-400'}`}>
-                        ${(flavor.price_cents / 100).toFixed(2)}
-                      </span>
-                      {flavor.available ? (
-                        <div className="flex items-center text-emerald-600 text-sm font-medium">
-                          <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full mr-2 animate-pulse"></div>
-                          Available Now
-                        </div>
-                      ) : (
-                        <div className="flex items-center text-gray-500 text-sm font-medium">
-                          <div className="w-2.5 h-2.5 bg-gray-400 rounded-full mr-2"></div>
-                          Check Back Soon
-                        </div>
-                      )}
+                  )}
+                </div>
+                <div className="flavor-content p-4">
+                  {limit ? (
+                    // Simplified home page version - just name
+                    <div className="text-center">
+                      <h3 className="text-lg font-semibold text-gray-800 tracking-wide">
+                        {flavor.name}
+                      </h3>
                     </div>
-                  </>
-                )}
+                  ) : (
+                    // Full flavor page version with all details
+                    <>
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className={`text-lg font-semibold tracking-wide ${flavor.available ? 'text-gray-700' : 'text-gray-500'}`}>
+                          {flavor.name}
+                        </h3>
+                        <div className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border ${
+                          flavor.available
+                            ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                            : 'bg-gray-50 text-gray-500 border-gray-200'
+                        }`}>
+                          {flavor.available ? 'In Stock' : 'Out of Stock'}
+                        </div>
+                      </div>
+                      <p className={`flavor-description mb-4 text-sm leading-relaxed ${flavor.available ? 'text-gray-600' : 'text-gray-400'}`}>
+                        {flavor.description}
+                      </p>
+                      <div className="flavor-footer flex justify-between items-center pt-2 border-t border-gray-100">
+                        <span className={`price text-xl font-bold tracking-tight ${flavor.available ? 'text-pink-500' : 'text-gray-400'}`}>
+                          ${(flavor.price_cents / 100).toFixed(2)}
+                        </span>
+                        {flavor.available ? (
+                          <div className="flex items-center text-emerald-600 text-sm font-medium">
+                            <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full mr-2 animate-pulse"></div>
+                            Available Now
+                          </div>
+                        ) : (
+                          <div className="flex items-center text-gray-500 text-sm font-medium">
+                            <div className="w-2.5 h-2.5 bg-gray-400 rounded-full mr-2"></div>
+                            Check Back Soon
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {showViewAll && (
-        <div className="view-all-section text-center mt-8">
-          <Link
-            to="/flavors"
-            className="view-all-btn bg-pink-600 text-white px-8 py-3 rounded-lg hover:bg-pink-700 transition-colors inline-block font-medium"
-          >
-            View All Flavors →
-          </Link>
-        </div>
-      )}
+        {showViewAll && (
+          <div className="view-all-section text-center mt-8">
+            <Link
+              to="/flavors"
+              className="view-all-btn bg-pink-600 text-white px-8 py-3 rounded-lg hover:bg-pink-700 transition-colors inline-block font-medium"
+            >
+              View All Flavors →
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

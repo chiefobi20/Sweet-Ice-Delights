@@ -6,11 +6,17 @@ import About from './About'
 import Flavors from './Flavors'
 import Hours from './Hours'
 import Contact from './Contact'
+import backgroundImage from '../assets/italian-ice-bg-3.jpg'
 import '../App.css'
 
 function App() {
   return (
-    <div className="App">
+    <div
+      className="App min-h-screen bg-cover bg-center bg-fixed"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+      }}
+    >
       <Header />
       <main className="main-content">
         <Routes>
