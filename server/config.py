@@ -1,31 +1,38 @@
-# Standard library imports
-
-# Remote library imports
+import os
 from flask import Flask
-from flask_cors import CORS
-from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
+from flask_migrate import Migrate
+from flask_cors import CORS
+from dotenv import load_dotenv
 
-# Local imports
+# Load environment variables
+load_dotenv()
 
-# Instantiate app, set attributes
+# Initialize Flask app
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+
+# Configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
 
-# Define metadata, instantiate db
-metadata = MetaData(naming_convention={
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-})
-db = SQLAlchemy(metadata=metadata)
+# Email configuration
+app.config['SMTP_SERVER'] = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
+app.config['SMTP_PORT'] = int(os.getenv('SMTP_PORT', 587))
+app.config['SENDER_EMAIL'] = os.getenv('SENDER_EMAIL', 'your-test-email@gmail.com')
+app.config['SENDER_PASSWORD'] = os.getenv('SENDER_PASSWORD', 'your-app-password')
+app.config['RECIPIENT_EMAIL'] = os.getenv('RECIPIENT_EMAIL', 'sweeticedelights.test@gmail.com')
+
+# Initialize extensions
+db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-db.init_app(app)
-
-# Instantiate REST API
 api = Api(app)
 
-# Instantiate CORS
-CORS(app)
+# Enable CORS
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000", "http://localhost:3001", "http://127.0.0.1:3000"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})

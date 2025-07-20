@@ -1,0 +1,4277 @@
+/* Global Professional Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f4f4f4;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+.header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #3498db;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* Card Styles */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+/* Footer */
+.footer {
+  background: #2c3e50;
+  color: white;
+  padding: 2rem 0 1rem;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 1rem;
+  color: #3498db;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #3498db;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #34495e;
+  color: #bdc3c7;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav ul {
+    gap: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav ul {
+    gap: 0.5rem;
+  }
+
+  .nav a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Force lighter text for specific sections only */
+.home h1, .home h2, .home h3, .home h4, .home h5, .home h6, .home p, .home span, .home div,
+.flavor-list h1, .flavor-list h2, .flavor-list h3, .flavor-list h4, .flavor-list h5, .flavor-list h6, .flavor-list p, .flavor-list span, .flavor-list div,
+.hours h1, .hours h2, .hours h3, .hours h4, .hours h5, .hours h6, .hours p, .hours span, .hours div {
+  color: #e5e7eb !important; /* Light gray instead of pure white */
+}
+
+/* Hours section background containers for readability */
+.hours .page-header,
+.hours .hours-hero,
+.hours .schedule-card,
+.hours .hours-info,
+.hours .info-card,
+.hours .location-reminder {
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 2rem !important;
+  margin-bottom: 1.5rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.hours .hours-list {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 8px !important;
+  padding: 1.5rem !important;
+  margin-top: 1rem !important;
+}
+
+.hours .hours-item {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  padding: 1rem !important;
+  margin-bottom: 0.5rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.hours .location-details {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 8px !important;
+  padding: 1.5rem !important;
+  margin-top: 1rem !important;
+}
+
+.hours .location-actions {
+  margin-top: 1rem !important;
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .home, .about, .contact, .hours, .flavor-list {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Responsive Background Adjustments */
+@media (max-width: 768px)

@@ -1,169 +1,53 @@
-from datetime import datetime
-from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.orm import validates
 from flask_sqlalchemy import SQLAlchemy
-
-from server.config import db
-
-
-class User(db.Model, SerializerMixin):
-    __tablename__ = "users"
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), nullable=False, unique=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    orders = db.relationship("Order", back_populates="user", cascade="all, delete-orphan")
-    carts = db.relationship("Cart", back_populates="user", cascade="all, delete-orphan")
-
-    serialize_rules = ("-orders.user", "-carts.user",)
-
-    @validates("username")
-    def validate_username(self, key, value):
-        if not value or len(value.strip()) == 0:
-            raise ValueError("Username must be a non-empty string")
-        return value
-
-    @validates("email")
-    def validate_email(self, key, value):
-        if not value or "@" not in value:
-            raise ValueError("Invalid email address")
-        return value
-
-    def __repr__(self):
-        return f"<User {self.id}: {self.username}>"
-
+from sqlalchemy_serializer import SerializerMixin
+from datetime import datetime
+from config import db
 
 class Flavor(db.Model, SerializerMixin):
-    __tablename__ = "flavors"
+    __tablename__ = 'flavors'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False, unique=True)
+    name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
-    price_cents = db.Column(db.Integer, nullable=False, default=0)
-    is_active = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    price_cents = db.Column(db.Integer, nullable=False)
+    # Use is_active to match migration
+    is_active = db.Column(db.Boolean, default=True, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    order_items = db.relationship("OrderItem", back_populates="flavor", cascade="all, delete-orphan")
-    cart_items = db.relationship("CartItem", back_populates="flavor", cascade="all, delete-orphan")
-    reviews = db.relationship("Review", back_populates="flavor", cascade="all, delete-orphan")
+    # Add property for backward compatibility
+    @property
+    def available(self):
+        return self.is_active
 
-    serialize_rules = ("-order_items.flavor", "-cart_items.flavor", "-reviews.flavor",)
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price_cents': self.price_cents,
+            'available': self.is_active  # Use is_active but return as available
+        }
 
-    @validates("name")
-    def validate_name(self, key, value):
-        if not value or len(value.strip()) == 0:
-            raise ValueError("Flavor name must be a non-empty string")
-        return value
-
-    def __repr__(self):
-        return f"<Flavor {self.name}>"
-
-
-class Order(db.Model, SerializerMixin):
-    __tablename__ = "orders"
-
-    id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    status = db.Column(db.String(20), default="pending")
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
-
-    user = db.relationship("User", back_populates="orders")
-    order_items = db.relationship("OrderItem", back_populates="order", cascade="all, delete-orphan")
-
-    serialize_rules = ("-order_items.order", "-user.orders",)
-
-
-class OrderItem(db.Model, SerializerMixin):
-    __tablename__ = "order_items"
+class ContactMessage(db.Model, SerializerMixin):
+    __tablename__ = 'contact_messages'
 
     id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.Integer, nullable=False)
-    unit_price = db.Column(db.Integer, nullable=False)
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=False)
-    flavor_id = db.Column(db.Integer, db.ForeignKey("flavors.id"), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    phone = db.Column(db.String(20))
+    event_type = db.Column(db.String(50))
+    message = db.Column(db.Text, nullable=False)
+    selected_dates = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    order = db.relationship("Order", back_populates="order_items")
-    flavor = db.relationship("Flavor", back_populates="order_items")
-
-    serialize_rules = ("-order.order_items", "-flavor.order_items",)
-
-    @validates("quantity")
-    def validate_quantity(self, key, value):
-        if value < 1:
-            raise ValueError("Quantity must be at least 1")
-        return value
-
-    @validates("unit_price")
-    def validate_unit_price(self, key, value):
-        if value < 0:
-            raise ValueError("Unit price must be non-negative")
-        return value
-
-    def __repr__(self):
-        return f"<OrderItem {self.id}: Order {self.order_id}, Flavor {self.flavor_id}, Qty {self.quantity}>"
-
-
-class Cart(db.Model, SerializerMixin):
-    __tablename__ = "carts"
-
-    id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    is_active = db.Column(db.Boolean, default=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-
-    user = db.relationship("User", back_populates="carts")
-    cart_items = db.relationship("CartItem", back_populates="cart", cascade="all, delete-orphan")
-
-    serialize_rules = ("-cart_items.cart", "-user.carts",)
-
-    def __repr__(self):
-        return f"<Cart {self.id} for User {self.user_id}>"
-
-
-class CartItem(db.Model, SerializerMixin):
-    __tablename__ = "cart_items"
-
-    id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.Integer, nullable=False)
-    cart_id = db.Column(db.Integer, db.ForeignKey("carts.id"), nullable=False)
-    flavor_id = db.Column(db.Integer, db.ForeignKey("flavors.id"), nullable=False)
-
-    cart = db.relationship("Cart", back_populates="cart_items")
-    flavor = db.relationship("Flavor", back_populates="cart_items")
-
-    serialize_rules = ("-cart.cart_items", "-flavor.cart_items",)
-
-    @validates("quantity")
-    def validate_quantity(self, key, value):
-        if value < 1:
-            raise ValueError("Quantity must be at least 1")
-        return value
-
-    def __repr__(self):
-        return f"<CartItem {self.id}: Cart {self.cart_id}, Flavor {self.flavor_id}, Qty {self.quantity}>"
-
-
-class Review(db.Model, SerializerMixin):
-    __tablename__ = "reviews"
-
-    id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.Integer, nullable=False)
-    comment = db.Column(db.Text)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    flavor_id = db.Column(db.Integer, db.ForeignKey("flavors.id"), nullable=False)
-
-    flavor = db.relationship("Flavor", back_populates="reviews")
-
-    serialize_rules = ("-flavor.reviews",)
-
-    @validates("rating")
-    def validate_rating(self, key, value):
-        if not (1 <= value <= 5):
-            raise ValueError("Rating must be between 1 and 5")
-        return value
-
-    def __repr__(self):
-        return f"<Review {self.id} for Flavor {self.flavor_id}: {self.rating}>"
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'phone': self.phone,
+            'event_type': self.event_type,
+            'message': self.message,
+            'selected_dates': self.selected_dates.split(',') if self.selected_dates else [],
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
