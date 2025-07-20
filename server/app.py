@@ -119,6 +119,7 @@ class Contact(Resource):
             if not data:
                 return {'error': 'No data provided'}, 400
 
+            # Save to database
             contact_message = ContactMessage(
                 name=data.get('name'),
                 email=data.get('email'),
@@ -131,12 +132,65 @@ class Contact(Resource):
             db.session.add(contact_message)
             db.session.commit()
 
+            # Send email notification
+            self.send_email_notification(data)
+
             return {'message': 'Contact form submitted successfully'}
 
         except Exception as e:
             print(f"❌ Contact form error: {str(e)}")
             db.session.rollback()
             return {'error': 'Failed to process contact form'}, 500
+
+    def send_email_notification(self, data):
+        """Send email notification for contact form submission"""
+        try:
+            print(f"🔍 Email Config Check:")
+            print(f"  SMTP_SERVER: {app.config.get('SMTP_SERVER')}")
+            print(f"  SMTP_PORT: {app.config.get('SMTP_PORT')}")
+            print(f"  SENDER_EMAIL: {app.config.get('SENDER_EMAIL')}")
+            print(f"  RECIPIENT_EMAIL: {app.config.get('RECIPIENT_EMAIL')}")
+
+            msg = MIMEMultipart()
+            msg['From'] = app.config['SENDER_EMAIL']
+            msg['To'] = app.config['RECIPIENT_EMAIL']
+            msg['Subject'] = f"New Contact Form Submission - {data.get('name')}"
+
+            body = f"""
+New contact form submission:
+
+Name: {data.get('name')}
+Email: {data.get('email')}
+Phone: {data.get('phone', 'Not provided')}
+Event Type: {data.get('eventType', 'Not specified')}
+Selected Dates: {', '.join(data.get('selectedDates', []))}
+
+Message:
+{data.get('message')}
+            """
+
+            msg.attach(MIMEText(body, 'plain'))
+
+            print("📧 Connecting to SMTP server...")
+            server = smtplib.SMTP(app.config['SMTP_SERVER'], app.config['SMTP_PORT'])
+
+            print("🔐 Starting TLS...")
+            server.starttls()
+
+            print("🔑 Logging in...")
+            server.login(app.config['SENDER_EMAIL'], app.config['SENDER_PASSWORD'])
+
+            print("📤 Sending message...")
+            server.send_message(msg)
+            server.quit()
+
+            print("✅ Email sent successfully")
+
+        except Exception as e:
+            print(f"❌ Email sending failed: {e}")
+            print(f"❌ Error type: {type(e).__name__}")
+            import traceback
+            traceback.print_exc()
 
 # Add resources to API
 api.add_resource(Flavors, '/api/flavors')
@@ -174,6 +228,29 @@ def debug():
             'error': str(e),
             'database_connected': False
         }), 500
+
+@app.route('/api/test-email')
+def test_email():
+    """Test email configuration"""
+    try:
+        server = smtplib.SMTP(app.config['SMTP_SERVER'], app.config['SMTP_PORT'])
+        server.starttls()
+        server.login(app.config['SENDER_EMAIL'], app.config['SENDER_PASSWORD'])
+        server.quit()
+        return jsonify({'status': 'Email config working!'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/debug-config')
+def debug_config():
+    """Debug configuration values"""
+    return jsonify({
+        'SMTP_SERVER': app.config.get('SMTP_SERVER'),
+        'SMTP_PORT': app.config.get('SMTP_PORT'),
+        'SENDER_EMAIL': app.config.get('SENDER_EMAIL'),
+        'RECIPIENT_EMAIL': app.config.get('RECIPIENT_EMAIL'),
+        'has_password': bool(app.config.get('SENDER_PASSWORD'))
+    })
 
 if __name__ == '__main__':
     print("🚀 Starting Flask server on http://localhost:5000")
