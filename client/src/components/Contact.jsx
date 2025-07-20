@@ -100,7 +100,7 @@ function Contact() {
   };
 
   const handleDateClick = (dateString) => {
-    console.log('Date clicked:', dateString); // Debug log
+    console.log('Date clicked:', dateString);
     if (isDateUnavailable(dateString)) {
       console.log('Date unavailable, ignoring click');
       return;
@@ -110,7 +110,7 @@ function Contact() {
       ? formData.selectedDates.filter(date => date !== dateString)
       : [...formData.selectedDates, dateString];
 
-    console.log('New selected dates:', newSelectedDates); // Debug log
+    console.log('New selected dates:', newSelectedDates);
     setFormData({
       ...formData,
       selectedDates: newSelectedDates
@@ -195,7 +195,14 @@ function Contact() {
                 <h4>Your Preferred Dates:</h4>
                 <ul>
                   {formData.selectedDates.map(date => (
-                    <li key={date}>{new Date(date).toLocaleDateString()}</li>
+                    <li key={date}>
+                      {new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -314,7 +321,11 @@ function Contact() {
                       <div className="selected-dates-list">
                         {formData.selectedDates.map(date => (
                           <span key={date} className="selected-date-tag">
-                            {new Date(date).toLocaleDateString()}
+                            {new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })}
                             <button
                               type="button"
                               onClick={() => handleDateClick(date)}
