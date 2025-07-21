@@ -13,10 +13,16 @@ body {
 }
 
 .App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  /* make it fill the whole screen */
+  width:  100vw;
+  height: 100vh;
+
+  /* background-fit rules */
+  background-size:      cover;
+  background-position:  center center;
+  background-attachment: fixed;
 }
+
 
 /* Header Styles */
 .header {

@@ -122,72 +122,37 @@ function FlavorList({ limit, showViewAll = false }) {
           </h2>
         )}
 
-        <div className="flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-4xl">
-            {flavors.map(flavor => (
-              <div key={flavor.id} className={`flavor-card bg-white rounded-xl shadow-lg overflow-hidden max-w-xs w-full hover:shadow-xl transition-all duration-300 ${!flavor.available && !limit ? 'opacity-90' : ''}`}>
-                <div className="flavor-image relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl mx-auto">
+          {flavors.slice(0, 6).map(flavor => (
+            <div
+              key={flavor.id}
+              className="flavor-card bg-white rounded-xl shadow-lg overflow-hidden w-full"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div className="flavor-image relative">
+                <div className="aspect-w-1 aspect-h-1">
                   <img
                     src={flavor.image}
                     alt={flavor.name}
-                    className={`w-full h-20 object-cover transition-all duration-300 ${!flavor.available && !limit ? 'grayscale' : ''}`}
+                    className="w-full h-full object-cover transition-all duration-300"
                   />
-                  {!flavor.available && !limit && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-gray-800/70 to-gray-900/70 flex items-center justify-center">
-                      <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
-                        TEMPORARILY UNAVAILABLE
-                      </div>
-                    </div>
-                  )}
                 </div>
-                <div className="flavor-content p-4">
-                  {limit ? (
-                    // Simplified home page version - just name
-                    <div className="text-center">
-                      <h3 className="text-lg font-semibold text-gray-800 tracking-wide">
-                        {flavor.name}
-                      </h3>
+                {!flavor.available && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-800/70 to-gray-900/70 flex items-center justify-center">
+                    <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
+                      OUT OF STOCK
                     </div>
-                  ) : (
-                    // Full flavor page version with all details
-                    <>
-                      <div className="flex justify-between items-start mb-3">
-                        <h3 className={`text-lg font-semibold tracking-wide ${flavor.available ? 'text-gray-700' : 'text-gray-500'}`}>
-                          {flavor.name}
-                        </h3>
-                        <div className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border ${
-                          flavor.available
-                            ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
-                            : 'bg-gray-50 text-gray-500 border-gray-200'
-                        }`}>
-                          {flavor.available ? 'In Stock' : 'Out of Stock'}
-                        </div>
-                      </div>
-                      <p className={`flavor-description mb-4 text-sm leading-relaxed ${flavor.available ? 'text-gray-600' : 'text-gray-400'}`}>
-                        {flavor.description}
-                      </p>
-                      <div className="flavor-footer flex justify-between items-center pt-2 border-t border-gray-100">
-                        <span className={`price text-xl font-bold tracking-tight ${flavor.available ? 'text-pink-500' : 'text-gray-400'}`}>
-                          ${(flavor.price_cents / 100).toFixed(2)}
-                        </span>
-                        {flavor.available ? (
-                          <div className="flex items-center text-emerald-600 text-sm font-medium">
-                            <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full mr-2 animate-pulse"></div>
-                            Available Now
-                          </div>
-                        ) : (
-                          <div className="flex items-center text-gray-500 text-sm font-medium">
-                            <div className="w-2.5 h-2.5 bg-gray-400 rounded-full mr-2"></div>
-                            Check Back Soon
-                          </div>
-                        )}
-                      </div>
-                    </>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
+              <div className="flavor-content p-4 text-center">
+                <h3 className="text-lg font-semibold text-gray-800 tracking-wide">
+                  {flavor.name}
+                </h3>
+              </div>
+            </div>
+          ))}
         </div>
 
         {showViewAll && (

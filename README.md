@@ -59,10 +59,12 @@ sweet-ice-delights/
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone the repository & Activate Virtual Environment**
    ```bash
    git clone <repository-url>
    cd sweet-ice-delights
+   source venv/bin/activate  # For Unix-based systems
+   venv\Scripts\activate    # For Windows
    ```
 
 2. **Setup Backend**

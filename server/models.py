@@ -36,10 +36,9 @@ class Flavor(db.Model, SerializerMixin):
     is_active = db.Column(db.Boolean, default=True, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    # Add property for backward compatibility
-    @property
-    def available(self):
-        return self.is_active
+    def available(self,value):
+        self._available = value
+        self.is_active = value
 
     def to_dict(self):
         return {
