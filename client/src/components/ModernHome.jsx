@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ModernHome.css';
@@ -12,6 +13,14 @@ const ModernHome = () => {
   const ctaRef = useRef(null);
   const particlesRef = useRef(null);
   const sectionsRef = useRef([]);
+  const featuredSectionRef = useRef(null);
+
+  const scrollToFlavors = () => {
+    featuredSectionRef.current?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
 
   const featuredFlavors = [
     {
@@ -158,7 +167,7 @@ const ModernHome = () => {
             <p className="hero-description">Experience the finest gelato and Italian ice crafted with passion and tradition</p>
           </div>
           <div className="cta-container" ref={ctaRef}>
-            <button className="cta-button">
+            <button className="cta-button" onClick={scrollToFlavors}>
               <span>Explore Flavors</span>
               <div className="button-glow"></div>
             </button>
@@ -170,7 +179,7 @@ const ModernHome = () => {
       </section>
 
       {/* Featured Flavors Section */}
-      <section className="section featured-section" ref={addToRefs}>
+      <section className="section featured-section" ref={(el) => { addToRefs(el); featuredSectionRef.current = el; }}>
         <div className="container">
           <h2 className="section-title">Featured Flavors</h2>
           <div className="flavors-grid">
@@ -193,6 +202,12 @@ const ModernHome = () => {
               </div>
             ))}
           </div>
+          <div className="more-flavors-container">
+            <Link to="/flavors" className="more-flavors-button">
+              <span>More Flavors</span>
+              <div className="button-glow"></div>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -213,7 +228,7 @@ const ModernHome = () => {
 
       {/* Location & Hours */}
       <section className="section info-section" ref={addToRefs} style={{ backgroundColor: 'aliceblue' }}>
-        <div className="container">
+        <div className="bottom-of-home-container">
           <div className="info-grid">
             <div className="info-card">
               <h3>Visit Us</h3>

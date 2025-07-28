@@ -168,3 +168,57 @@
     display: none;
   }
 }
+
+.night-mode-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+}
+
+.night-mode-toggle:hover {
+  background: rgba(255, 105, 180, 0.1);
+  transform: scale(1.1);
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+  transition: transform 0.5s ease;
+}
+
+/* Night Mode Styles */
+body.night-mode {
+  background: #1a1719 !important;
+  color: #eb4aa2d5 !important;
+}
+
+body.night-mode .modern-navbar {
+  background: #000000 !important;
+  border-bottom: 1px solid rgba(235, 74, 162, 0.2) !important;
+}
+
+body.night-mode .nav-link {
+  color: #eb4aa2d5 !important;
+}
+
+body.night-mode .nav-link:hover {
+  background: rgba(235, 74, 162, 0.1) !important;
+  color: #eb4aa2d5 !important;
+}
+
+body.night-mode .company-name {
+  background: linear-gradient(135deg, #eb4aa2d5, #ff1493) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+body.night-mode .night-mode-toggle:hover {
+  background: rgba(235, 74, 162, 0.1) !important;
+}

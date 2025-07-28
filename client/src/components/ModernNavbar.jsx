@@ -11,6 +11,7 @@ const ModernNavbar = () => {
   const emojiRef = useRef(null);
   const companyNameRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isNightMode, setIsNightMode] = useState(false);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -65,6 +66,18 @@ const ModernNavbar = () => {
     });
   };
 
+  const handleNightModeToggle = () => {
+    setIsNightMode(!isNightMode);
+    document.body.classList.toggle('night-mode', !isNightMode);
+    
+    // Toggle animation
+    gsap.to('.night-mode-toggle', {
+      rotation: isNightMode ? 0 : 180,
+      duration: 0.5,
+      ease: "back.out(1.7)"
+    });
+  };
+
   return (
     <nav className="modern-navbar" ref={navRef}>
       <div className="nav-container">
@@ -92,6 +105,13 @@ const ModernNavbar = () => {
             <div className={`status-dot ${isOpen ? 'open' : 'closed'}`}></div>
             <span className="status-text">{isOpen ? 'Open' : 'Closed'}</span>
           </div>
+          <button 
+            className="night-mode-toggle"
+            onClick={handleNightModeToggle}
+            aria-label="Toggle night mode"
+          >
+            <span className="toggle-icon">🌙</span>
+          </button>
         </div>
       </div>
     </nav>
