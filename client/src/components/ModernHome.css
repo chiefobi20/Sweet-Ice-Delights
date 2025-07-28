@@ -1,0 +1,392 @@
+.modern-home {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Particles Background */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.6) 0%, rgba(255, 182, 193, 0.1) 70%);
+  filter: blur(1px);
+}
+
+.particle-0, .particle-5, .particle-10, .particle-15 {
+  width: 8px;
+  height: 8px;
+  top: 20%;
+  left: 10%;
+  background: radial-gradient(circle, rgba(255, 105, 180, 0.5) 0%, rgba(255, 105, 180, 0.1) 70%);
+}
+
+.particle-1, .particle-6, .particle-11, .particle-16 {
+  width: 12px;
+  height: 12px;
+  top: 60%;
+  left: 80%;
+  background: radial-gradient(circle, rgba(135, 206, 250, 0.4) 0%, rgba(135, 206, 250, 0.1) 70%);
+}
+
+.particle-2, .particle-7, .particle-12, .particle-17 {
+  width: 6px;
+  height: 6px;
+  top: 40%;
+  left: 60%;
+}
+
+.particle-3, .particle-8, .particle-13, .particle-18 {
+  width: 10px;
+  height: 10px;
+  top: 80%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.1) 70%);
+}
+
+.particle-4, .particle-9, .particle-14, .particle-19 {
+  width: 14px;
+  height: 14px;
+  top: 30%;
+  left: 90%;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.5) 0%, rgba(255, 182, 193, 0.1) 70%);
+}
+
+/* Hero Section */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+              url('/src/assets/italian-ice-bg-3.jpg') center/cover;
+  z-index: 1;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 105, 180, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.hero-logo {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff69b4, #ff1493, #dc143c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #34495e;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CTA Button */
+.cta-container {
+  position: relative;
+}
+
+.cta-button {
+  position: relative;
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
+}
+
+.button-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.cta-button:hover .button-glow {
+  left: 100%;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-arrow {
+  width: 2px;
+  height: 30px;
+  background: linear-gradient(to bottom, transparent, #ff69b4);
+  position: relative;
+  animation: scrollBounce 2s infinite;
+}
+
+.scroll-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: -10px;
+  width: 23px;
+  height: 25px;
+  border-right: 2px solid #ff69b4;
+  border-bottom: 2px solid #ff69b4;
+  transform: rotate(45deg);
+}
+
+@keyframes scrollBounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* Sections */
+.section {
+  padding: 4rem 0;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 2rem 0;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  background-color: #ff69b4b4;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #6495edcc;
+  text-shadow: 0 0px 8px #dfe8ff;
+  font-weight: 700;
+  
+}
+
+/* Featured Flavors Grid */
+.flavors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  
+
+}
+
+.flavor-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.flavor-card:hover {
+  transform: translateY(-10px);
+}
+
+.flavor-image {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.flavor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.flavor-card:hover .flavor-image img {
+  transform: scale(1.1);
+}
+
+.flavor-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #6495edcc;
+  color: white;
+  padding: 1rem;
+  transform: translateY(100%);
+  box-shadow: 0 10px 30px rgba(233, 7, 120, 0.2);
+  transition: transform 0.3s ease;
+    
+  
+  
+}
+
+.flavor-card:hover .flavor-overlay {
+  transform: translateY(0);
+}
+
+.flavor-overlay h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+
+}
+
+.flavor-overlay p {
+  color: #f8f9fa;
+}
+
+/* Parallax Section */
+.parallax-section {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: aliceblue;
+}
+
+.parallax-bg {
+  position: absolute;
+  top: 13%;
+  left: 11px;
+  width: 102%;
+  height: 118%;
+  background: url('/src/assets/italian-ice-bg.jpg') center/cover;
+  z-index: -1;
+  filter: blur(.4px);
+}
+
+.about-content {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #2c3e50;
+}
+
+/* Info Section */
+.section-info-section {
+  background-color: aliceblue;
+}
+
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+}
+
+.info-card h3 {
+  color: #ff69b4;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.info-card p {
+  color: #2c3e50;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 0 1rem;
+  }
+  
+  .flavors-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .about-content {
+    padding: 2rem;
+    margin: 0 1rem;
+  }
+}
+
+/* Scroll behavior fix */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}

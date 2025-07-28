@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "gsap": "^3.13.0",
     "react-router-dom": "^7.7.0"
   }
 }

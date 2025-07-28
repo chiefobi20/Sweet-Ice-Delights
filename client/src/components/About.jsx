@@ -1,112 +1,80 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 function About() {
   return (
-    <div className="about bg-white/95 backdrop-blur-md min-h-screen py-8">
-      <div className="container max-w-4xl mx-auto">
-        <div className="page-header text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800">About Sweet Ice Delights</h1>
-        </div>
+    <div className="about">
+      <div className="container max-w-6xl mx-auto px-8 py-16">
+        <section className="about-hero mb-16">
+          <h1 className="text-5xl font-bold text-center mb-8 bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+            About Sweet Ice Delights
+          </h1>
+          <p className="text-xl text-center text-gray-700 max-w-4xl mx-auto leading-relaxed">
+            For three generations, our family has been crafting authentic Italian ice using traditional methods passed down from our ancestors in Sicily.
+          </p>
+        </section>
 
-        <div className="about-content bg-white/90 backdrop-blur-md rounded-xl p-8 shadow-lg text-gray-800">
-          {/* Hero Section */}
-          <section className="about-hero">
-            <div className="about-hero-content">
-              <h2>🍧 Our Story</h2>
-              <p className="lead">
-                Welcome to Sweet Ice Delights, where authentic Italian ice meets modern convenience.
-                Since our founding, we've been dedicated to bringing you the refreshing taste of
-                traditional Italian gelato and granita, made fresh daily with the finest ingredients.
+        <section className="about-story mb-16">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-6 text-gray-800">Our Story</h2>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                It all started in 1952 when our grandfather, Giuseppe Deluca, brought his family's secret gelato recipes from the hills of Sicily to America. What began as a small pushcart operation has grown into the beloved Sweet Ice Delights you know today.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Every scoop tells a story of passion, tradition, and the finest ingredients sourced from around the Mediterranean. We believe that great Italian ice isn't just about taste—it's about creating moments of joy and bringing families together.
               </p>
             </div>
-          </section>
-
-          {/* Mission Section */}
-          <section className="about-section">
-            <h2>Our Mission</h2>
-            <p>
-              At Sweet Ice Delights, we believe that life's sweetest moments deserve the perfect treat.
-              Our mission is to craft authentic Italian ice that brings joy, refreshment, and a taste
-              of Italy to every customer. We're committed to using only the finest natural ingredients,
-              traditional recipes, and innovative flavors that celebrate both heritage and creativity.
-            </p>
-          </section>
-
-          {/* Values Section */}
-          <br></br>
-          <section className="about-section">
-            <h2>What Makes Us Special</h2>
-            <div className="values-grid">
-              <div className="value-card">
-                <div className="value-icon">🌟</div>
-                <h3>Premium Quality</h3>
-                <p>
-                  We source the finest natural ingredients and use traditional Italian methods
-                  to ensure every scoop meets our high standards of excellence.
-                </p>
-              </div>
-
-              <div className="value-card">
-                <div className="value-icon">❄️</div>
-                <h3>Fresh Daily</h3>
-                <p>
-                  Every batch is made fresh daily in small quantities to guarantee the perfect
-                  texture, flavor, and quality you deserve.
-                </p>
-              </div>
-
-              <div className="value-card">
-                <div className="value-icon">🇮🇹</div>
-                <h3>Authentic Tradition</h3>
-                <p>
-                  Our recipes are inspired by generations of Italian gelato masters, bringing
-                  you the true taste of Italy in every bite.
-                </p>
-              </div>
-
-              <div className="value-card">
-                <div className="value-icon">🌱</div>
-                <h3>Natural Ingredients</h3>
-                <p>
-                  No artificial preservatives, colors, or flavors. Just pure, natural ingredients
-                  that you can feel good about enjoying.
-                </p>
-              </div>
+            <div className="bg-gradient-to-br from-pink-100 to-pink-200 p-8 rounded-2xl">
+              <h3 className="text-2xl font-bold mb-4 text-pink-600">What Makes Us Special</h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-center"><span className="text-pink-500 mr-3">🍧</span> Authentic Sicilian recipes</li>
+                <li className="flex items-center"><span className="text-pink-500 mr-3">🌿</span> Fresh, natural ingredients</li>
+                <li className="flex items-center"><span className="text-pink-500 mr-3">👨‍👩‍👧‍👦</span> Family-owned for 70+ years</li>
+                <li className="flex items-center"><span className="text-pink-500 mr-3">❤️</span> Made with love daily</li>
+              </ul>
             </div>
-          </section>
-
-          {/* Team Section */}
-          <br></br>
-          <section className="about-section">
-            <h2>Meet Our Team</h2>
-            <p>
-              Our passionate team of artisans and flavor experts work tirelessly to bring you
-              the best Italian ice experience. From our master gelato makers to our friendly
-              customer service team, everyone at Sweet Ice Delights shares a commitment to
-              excellence and customer satisfaction.
-            </p>
-          </section>
-
-
-          {/* Call to Action */}
-          <section className="about-cta">
-            <h2>Ready to Experience Sweet Ice Delights?</h2>
-            <p>
-              Come visit us today or order online for pickup. We can't wait to serve you
-              the most delicious Italian ice you've ever tasted!
-            </p>
-            <br></br>
-            <div className="cta-buttons">
-              <Link to="/flavors" className="cta-button primary">
-                View Our Flavors
-              </Link>
-              <br></br>
-              <Link to="/contact" className="cta-button secondary">
-                Get in Touch
-              </Link>
-            </div>
-          </section>
+            
+          </div>
+            <div className="container">
+    
+        <div className="about-content" style={{background: 'none'}}>
+          <img 
+            src="/src/assets/About page image.JPG" 
+            alt="About Sweet Ice Delights" 
+            className="about-image"
+            style={{
+              width: '100%',
+              maxWidth: '600px',
+              height: 'auto',
+              borderRadius: '15px',
+              marginBottom: '2rem',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
+            }}
+          />
+          
         </div>
+      </div>
+
+
+
+        </section>
+
+        <section className="about-cta text-center bg-gradient-to-r from-pink-500 to-pink-600 text-white p-12 rounded-2xl">
+          <h2 className="text-3xl font-bold mb-4">Ready to Experience Sweet Ice Delights?</h2>
+          <p className="text-xl mb-8 opacity-90">
+            Come visit us today or order online for pickup. We can't wait to serve you the most delicious Italian ice you've ever tasted!
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/flavors" className="bg-white text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-pink-50 transition">
+              View Our Flavors
+            </Link>
+            <Link to="/contact" className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-pink-600 transition">
+              Get in Touch
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );

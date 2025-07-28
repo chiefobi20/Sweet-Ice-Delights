@@ -58,14 +58,16 @@ function Home() {
 
       <section className="about-preview py-16">
         <div className="container">
-          <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 border-2 border-white/20 shadow-2xl animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="800">
-            <div className="about-content text-center max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-200 mb-6">About Sweet Ice Delights</h2>
-              
-              <Link to="/about" className="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition font-semibold shadow-lg animate__animated animate__pulse" data-aos="zoom-in" data-aos-delay="1000">
-                Learn More About Us
-              </Link>
-            </div>
+          <h2 className="text-3xl font-bold text-gray-200 mb-6 text-center">About Sweet Ice Delights</h2>
+          <p className="text-gray-300 text-lg mb-8 leading-relaxed font-medium text-center max-w-4xl mx-auto">
+            For three generations, our family has been crafting authentic Italian ice using traditional methods 
+            passed down from our ancestors in Sicily. Every scoop tells a story of passion, tradition, and 
+            the finest ingredients sourced from around the Mediterranean.
+          </p>
+          <div className="text-center">
+            <Link to="/about" className="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition font-semibold shadow-lg animate__animated animate__pulse" data-aos="zoom-in" data-aos-delay="1000">
+              Learn More About Us
+            </Link>
           </div>
         </div>
       </section>
