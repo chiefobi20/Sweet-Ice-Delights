@@ -1,9 +1,10 @@
+import React from 'react';
 import 'animate.css';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import { Link } from 'react-router-dom'
-import FlavorList from './FlavorList'
-import '../App.css'
+import { Link } from 'react-router-dom';
+import FlavorList from './FlavorList';
+import '../App.css';
 
 AOS.init({
   duration: 800,      // Animation duration in ms

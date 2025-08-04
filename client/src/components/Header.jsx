@@ -7,6 +7,7 @@ const Header = () => {
       <nav className="nav">
         <Link to="/about" className="nav-link">About</Link>
         <Link to="/contact" className="nav-link">Contact</Link>
+        <Link to="/donations" className="nav-link">Donate</Link>
         
         <Link to="/" className="logo">
           🍧 Sweet Ice Delights

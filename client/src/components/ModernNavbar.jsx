@@ -84,6 +84,7 @@ const ModernNavbar = () => {
         <div className="nav-left">
           <Link to="/about" className="nav-link">About</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
+          <Link to="/donations" className="nav-link">Donate</Link>
         </div>
         
         <div className="nav-center">
