@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import '../App.css';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -10,8 +10,8 @@ function Contact() {
     message: '',
     selectedDates: []
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -21,19 +21,11 @@ function Contact() {
     '2025-01-01', '2025-01-15', '2025-01-20'
   ];
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Send to backend API
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -46,12 +38,11 @@ function Contact() {
           eventType: formData.eventType,
           message: formData.message,
           selectedDates: formData.selectedDates
-        })
+        }),
       });
 
       if (response.ok) {
-        setIsSubmitting(false);
-        setShowSuccess(true);
+        alert('Message sent successfully!');
         setFormData({
           name: '',
           email: '',
@@ -60,23 +51,20 @@ function Contact() {
           message: '',
           selectedDates: []
         });
-      } else {
-        throw new Error('Failed to send message');
       }
     } catch (error) {
-      console.error('Error sending message:', error);
-      // Still show success for demo purposes
+      console.error('Error submitting form:', error);
+      alert('Error sending message. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setShowSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        eventType: '',
-        message: '',
-        selectedDates: []
-      });
     }
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const getDaysInMonth = (date) => {
@@ -99,6 +87,30 @@ function Contact() {
     return formData.selectedDates.includes(dateString);
   };
 
+  const checkConsecutiveDays = (newSelectedDates) => {
+    if (newSelectedDates.length < 5) return false;
+    
+    const sortedDates = newSelectedDates.sort();
+    let consecutiveCount = 1;
+    
+    for (let i = 1; i < sortedDates.length; i++) {
+      const currentDate = new Date(sortedDates[i]);
+      const previousDate = new Date(sortedDates[i - 1]);
+      const dayDifference = (currentDate - previousDate) / (1000 * 60 * 60 * 24);
+      
+      if (dayDifference === 1) {
+        consecutiveCount++;
+        if (consecutiveCount >= 5) {
+          return true;
+        }
+      } else {
+        consecutiveCount = 1;
+      }
+    }
+    
+    return false;
+  };
+
   const handleDateClick = (dateString) => {
     console.log('Date clicked:', dateString);
     if (isDateUnavailable(dateString)) {
@@ -109,6 +121,11 @@ function Contact() {
     const newSelectedDates = isDateSelected(dateString)
       ? formData.selectedDates.filter(date => date !== dateString)
       : [...formData.selectedDates, dateString];
+
+    if (checkConsecutiveDays(newSelectedDates)) {
+      alert('You cannot select 5 consecutive days. Please choose non-consecutive dates or limit consecutive selections to 4 days maximum.');
+      return;
+    }
 
     console.log('New selected dates:', newSelectedDates);
     setFormData({
@@ -130,7 +147,7 @@ function Contact() {
 
     // Empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
-      days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
+      days.push(<div key={`empty-${i}`} style={{ visibility: 'hidden' }}></div>);
     }
 
     // Days of the month
@@ -139,18 +156,67 @@ function Contact() {
       const isUnavailable = isDateUnavailable(dateString);
       const isSelected = isDateSelected(dateString);
 
+      let dayStyle = {
+        aspectRatio: '1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '6px',
+        fontWeight: '500',
+        fontSize: '0.9rem',
+        transition: 'all 0.2s ease',
+        border: '1px solid transparent',
+        minHeight: '35px',
+        cursor: isUnavailable ? 'not-allowed' : 'pointer',
+        userSelect: 'none'
+      };
+
+      if (isUnavailable) {
+        dayStyle = {
+          ...dayStyle,
+          background: '#6c757d',
+          color: 'white',
+          opacity: '0.7'
+        };
+      } else if (isSelected) {
+        dayStyle = {
+          ...dayStyle,
+          background: '#28a745',
+          color: 'white',
+          border: '1px solid #1e7e34',
+          fontWeight: '600'
+        };
+      } else {
+        dayStyle = {
+          ...dayStyle,
+          background: '#f8f9fa',
+          border: '1px solid #dee2e6',
+          color: '#495057'
+        };
+      }
+
       days.push(
         <div
           key={day}
-          className={`calendar-day ${isUnavailable ? 'unavailable' : 'available'} ${isSelected ? 'selected' : ''}`}
+          style={dayStyle}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             handleDateClick(dateString);
           }}
-          style={{
-            cursor: isUnavailable ? 'not-allowed' : 'pointer',
-            userSelect: 'none'
+          onMouseEnter={(e) => {
+            if (!isUnavailable && !isSelected) {
+              e.target.style.background = '#e9ecef';
+              e.target.style.borderColor = '#adb5bd';
+              e.target.style.transform = 'scale(1.05)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!isUnavailable && !isSelected) {
+              e.target.style.background = '#f8f9fa';
+              e.target.style.borderColor = '#dee2e6';
+              e.target.style.transform = 'scale(1)';
+            }
           }}
         >
           {day}
@@ -159,292 +225,306 @@ function Contact() {
     }
 
     return (
-      <div className="calendar-month">
-        <h4>{monthNames[date.getMonth()]} {date.getFullYear()}</h4>
-        <div className="calendar-weekdays">
-          <div>Sun</div>
-          <div>Mon</div>
-          <div>Tue</div>
-          <div>Wed</div>
-          <div>Thu</div>
-          <div>Fri</div>
-          <div>Sat</div>
+      <div style={{ textAlign: 'center' }}>
+        <h4 style={{ color: '#2c3e50', marginBottom: '1rem', fontSize: '1.1rem', fontWeight: '600' }}>
+          {monthNames[date.getMonth()]} {date.getFullYear()}
+        </h4>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(7, 1fr)',
+          gap: '2px',
+          marginBottom: '0.5rem'
+        }}>
+          <div style={{ padding: '0.5rem', fontWeight: '600', color: '#6c757d', fontSize: '0.8rem' }}>Sun</div>
+          <div style={{ padding: '0.5rem', fontWeight: '600', color: '#6c757d', fontSize: '0.8rem' }}>Mon</div>
+          <div style={{ padding: '0.5rem', fontWeight: '600', color: '#6c757d', fontSize: '0.8rem' }}>Tue</div>
+          <div style={{ padding: '0.5rem', fontWeight: '600', color: '#6c757d', fontSize: '0.8rem' }}>Wed</div>
+          <div style={{ padding: '0.5rem', fontWeight: '600', color: '#6c757d', fontSize: '0.8rem' }}>Thu</div>
+          <div style={{ padding: '0.5rem', fontWeight: '600', color: '#6c757d', fontSize: '0.8rem' }}>Fri</div>
+          <div style={{ padding: '0.5rem', fontWeight: '600', color: '#6c757d', fontSize: '0.8rem' }}>Sat</div>
         </div>
-        <div className="calendar-grid">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(7, 1fr)',
+          gap: '2px'
+        }}>
           {days}
         </div>
       </div>
     );
   };
 
-  if (showSuccess) {
-    return (
-      <div className="contact">
-        <div className="page-header">
-          <Link to="/" className="back-home-btn">← Home</Link>
-          <h1>Message Sent Successfully!</h1>
-        </div>
-
-        <div className="success-container">
-          <div className="success-card">
-            <div className="success-icon">✅</div>
-            <h2>Thank You for Contacting Us!</h2>
-            <p>We've received your message and will respond within 24 hours.</p>
-            {formData.selectedDates.length > 0 && (
-              <div className="selected-dates-summary">
-                <h4>Your Preferred Dates:</h4>
-                <ul>
-                  {formData.selectedDates.map(date => (
-                    <li key={date}>
-                      {new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <p>For urgent matters, please call us at <a href="tel:+15551234356">(555) 123-GELATO</a></p>
-            <button
-              onClick={() => setShowSuccess(false)}
-              className="cta-button primary"
-            >
-              Send Another Message
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="contact">
-      <div className="page-header">
-        <h1>Contact Us</h1>
-      </div>
+    <div className="contact min-h-screen flex items-center justify-center py-16">
+      <div className="container max-w-6xl mx-auto px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+            Contact Us
+          </h1>
+          <img 
+            src="/src/assets/high cam asorted flavors.JPG" 
+            alt="Assorted Flavors" 
+            className="contact-image mx-auto mb-6"
+            style={{
+              width: '100%',
+              maxWidth: '400px',
+              height: 'auto',
+              borderRadius: '15px',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
+            }}
+          />
+          <p className="text-xl text-gray-700">
+            Ready to make your event sweeter? Contact us for catering, special orders, or just to say hello.
+          </p>
+        </div>
 
-      <div className="contact-content">
-        {/* Contact Hero */}
-        <section className="contact-hero">
-          <div className="hero-content">
-            <h2>🍧 Get in Touch</h2>
-            <p className="lead">
-              Ready to make your event sweeter? Contact us for catering, special orders,
-              or just to say hello. We're here to help make your celebration unforgettable!
-            </p>
-          </div>
-        </section>
-
-        <div className="contact-main-centered">
-          {/* Contact Form */}
-          <section className="contact-form-section card">
-            <div className="form-container">
-              <h3>Send Us a Message</h3>
-              <form onSubmit={handleSubmit} className="contact-form">
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="name">Name *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email Address *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="phone">Phone Number</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="(555) 123-4567"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="eventType">Event Type</label>
-                    <select
-                      id="eventType"
-                      name="eventType"
-                      value={formData.eventType}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Select event type</option>
-                      <option value="birthday">Birthday Party</option>
-                      <option value="wedding">Wedding</option>
-                      <option value="corporate">Corporate Event</option>
-                      <option value="festival">Festival/Fair</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Date Selection */}
-                <div className="form-group">
-                  <label>Preferred Event Dates</label>
-                  <button
-                    type="button"
-                    className="calendar-toggle-btn"
-                    onClick={() => {
-                      console.log('Calendar toggle clicked, current state:', showCalendar);
-                      setShowCalendar(!showCalendar);
-                    }}
-                  >
-                    📅 {showCalendar ? 'Hide Calendar' : 'Select Dates'}
-                  </button>
-
-                  {formData.selectedDates.length > 0 && (
-                    <div className="selected-dates-display">
-                      <p>Selected dates:</p>
-                      <div className="selected-dates-list">
-                        {formData.selectedDates.map(date => (
-                          <span key={date} className="selected-date-tag">
-                            {new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric'
-                            })}
-                            <button
-                              type="button"
-                              onClick={() => handleDateClick(date)}
-                              className="remove-date-btn"
-                            >
-                              ×
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {showCalendar && (
-                    <div className="calendar-popup" style={{ display: 'block' }}>
-                      <div className="calendar-header">
-                        <h4>Select Your Preferred Dates</h4>
-                        <p>Click on available dates to select them for your event</p>
-                      </div>
-
-                      <div className="calendar-legend">
-                        <div className="legend-item">
-                          <div className="legend-color available"></div>
-                          <span>Available</span>
-                        </div>
-                        <div className="legend-item">
-                          <div className="legend-color selected"></div>
-                          <span>Selected</span>
-                        </div>
-                        <div className="legend-item">
-                          <div className="legend-color unavailable"></div>
-                          <span>Unavailable</span>
-                        </div>
-                      </div>
-
-                      <div className="calendar-container">
-                        {renderCalendar(0)}
-                        {renderCalendar(1)}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="message">Message *</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows="5"
-                    placeholder="Tell us about your event, number of guests, or any questions you have..."
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="submit-btn cta-button primary"
-                  disabled={isSubmitting}
+        <div className="grid md:grid-cols-2 gap-12">
+          <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-pink-200">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+              <span className="text-pink-500 mr-3">📧</span>
+              Send Us a Message
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  placeholder="your.email@example.com"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">Phone Number</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  placeholder="(555) 123-4567"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">Event Type</label>
+                <select
+                  name="eventType"
+                  value={formData.eventType}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  <option value="">Select event type</option>
+                  <option value="birthday">Birthday Party</option>
+                  <option value="wedding">Wedding</option>
+                  <option value="corporate">Corporate Event</option>
+                  <option value="festival">Festival/Fair</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              {/* Date Selection */}
+              <div className="form-group">
+                <label className="block text-gray-700 font-medium mb-2">Preferred Event Dates</label>
+                <button
+                  type="button"
+                  style={{
+                    background: 'linear-gradient(135deg, #007bff, #0056b3)',
+                    color: 'white',
+                    border: 'none',
+                    padding: '0.75rem 1.5rem',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    marginBottom: '1rem',
+                    width: '100%'
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowCalendar(!showCalendar);
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 5px 15px rgba(0, 123, 255, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                >
+                  📅 {showCalendar ? 'Hide Calendar' : 'Select Dates'}
                 </button>
-              </form>
-            </div>
-          </section>
 
-          {/* Quick Contact Info */}
-          <section className="quick-contact-section card">
-            <div className="quick-contact-container">
-              <h3>📞 Quick Contact</h3>
-              <p>Need immediate assistance? Reach out directly!</p>
+                {formData.selectedDates.length > 0 && (
+                  <div className="selected-dates-display">
+                    <p>Selected dates:</p>
+                    <div className="selected-dates-list">
+                      {formData.selectedDates.map(date => (
+                        <span key={date} className="selected-date-tag">
+                          {new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                          <button
+                            type="button"
+                            onClick={() => handleDateClick(date)}
+                            className="remove-date-btn"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-              <div className="quick-contact-cards">
-                <div className="quick-contact-card">
-                  <div className="contact-icon">📞</div>
-                  <h4>Call Us</h4>
-                  <a href="tel:+15551234356" className="contact-link">
-                    (555) 123-GELATO
-                  </a>
-                  <p className="contact-note">Mon-Fri: 9AM-6PM</p>
-                </div>
+                {showCalendar && (
+                  <div style={{
+                    background: 'white',
+                    border: '2px solid #e0e0e0',
+                    borderRadius: '12px',
+                    padding: '1.5rem',
+                    marginTop: '1rem',
+                    boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+                    position: 'relative',
+                    zIndex: 1000
+                  }}>
+                    <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                      <h4 style={{ color: '#2c3e50', marginBottom: '0.5rem', fontSize: '1.2rem', fontWeight: '600' }}>
+                        Select Your Preferred Dates
+                      </h4>
+                      <p style={{ color: '#6c757d', fontSize: '0.9rem', margin: 0 }}>
+                        Click on available dates to select them for your event
+                      </p>
+                    </div>
 
-                <div className="quick-contact-card">
-                  <div className="contact-icon">📧</div>
-                  <h4>Email Us</h4>
-                  <a href="mailto:events@sweeticedelights.com" className="contact-link">
-                    events@sweeticedelights.com
-                  </a>
-                  <p className="contact-note">24hr response</p>
-                </div>
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      gap: '2rem',
+                      marginBottom: '1.5rem',
+                      flexWrap: 'wrap'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
+                        <div style={{
+                          width: '20px',
+                          height: '20px',
+                          borderRadius: '4px',
+                          background: '#f8f9fa',
+                          border: '1px solid #dee2e6'
+                        }}></div>
+                        <span>Available</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
+                        <div style={{
+                          width: '20px',
+                          height: '20px',
+                          borderRadius: '4px',
+                          background: '#28a745',
+                          border: '1px solid #1e7e34'
+                        }}></div>
+                        <span>Selected</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
+                        <div style={{
+                          width: '20px',
+                          height: '20px',
+                          borderRadius: '4px',
+                          background: '#6c757d',
+                          border: '1px solid #495057'
+                        }}></div>
+                        <span>Unavailable</span>
+                      </div>
+                    </div>
 
-                <div className="quick-contact-card">
-                  <div className="contact-icon">📍</div>
-                  <h4>Visit Us</h4>
-                  <p>123 Gelato Street<br/>Sweet City, SC 12345</p>
-                  <p className="contact-note">Open daily!</p>
-                </div>
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
+                      gap: '2rem'
+                    }}>
+                      {renderCalendar(0)}
+                      {renderCalendar(1)}
+                    </div>
+                  </div>
+                )}
+              </div>
 
-                <div className="quick-contact-card">
-                  <div className="contact-icon">📱</div>
-                  <h4>Follow Us On Instagram</h4>
-                  <a href="https://instagram.com/sweeticedelights" className="contact-link" target="_blank" rel="noopener noreferrer">
-                    @sweeticedelights
-                  </a>
-                  <p className="contact-note">Daily updates</p>
-                </div>
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows="4"
+                  className="w-full px-4 py-3 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent resize-none"
+                  placeholder="Tell us about your event, number of guests, or any questions you have..."
+                  required
+                ></textarea>
+              </div>
 
-                <div className="quick-contact-card">
-                  <div className="contact-icon">👍</div>
-                  <h4>Like Us On Facebook</h4>
-                  <a href="https://facebook.com/sweeticedelights" className="contact-link" target="_blank" rel="noopener noreferrer">
-                    Sweet Ice Delights
-                  </a>
-                  <p className="contact-note">Events & specials</p>
-                </div>
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-pink-600 hover:to-pink-700 transition duration-300 transform hover:scale-105"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+            </form>
+          </div>
+
+          <div className="space-y-8">
+            <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-pink-200">
+              <h3 className="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                <span className="text-pink-500 mr-3">📞</span>
+                Quick Contact
+              </h3>
+              <div className="space-y-3 text-gray-700">
+                <p><strong>Call Us:</strong> (555) 123-GELATO</p>
+                <p><strong>Hours:</strong> Mon-Fri: 9AM-5PM</p>
+                <p><strong>Email:</strong> events@sweeticedelights.com</p>
+                <p><strong>Response:</strong> 24hr response</p>
               </div>
             </div>
-          </section>
+
+            <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-pink-200">
+              <h3 className="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                <span className="text-pink-500 mr-3">📍</span>
+                Visit Us
+              </h3>
+              <div className="space-y-2 text-gray-700">
+                <p>123 Gelato Street</p>
+                <p>Sweet City, SC 12345</p>
+                <p>Open daily</p>
+              </div>
+            </div>
+
+            <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-pink-200">
+              <h3 className="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                <span className="text-pink-500 mr-3">📱</span>
+                Follow Us
+              </h3>
+              <div className="space-y-2">
+                <p className="text-gray-700">@sweeticedelights</p>
+                <p className="text-gray-700">Daily updates</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -452,232 +532,3 @@ function Contact() {
 }
 
 export default Contact;
-
-// Add these styles to the existing CSS or create a separate CSS file
-const calendarStyles = `
-.calendar-popup {
-  background: white;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 1rem;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.calendar-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.calendar-header h4 {
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-
-.calendar-legend {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.legend-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-.legend-color.available {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-}
-
-.legend-color.selected {
-  background: #28a745;
-  border: 1px solid #1e7e34;
-}
-
-.legend-color.unavailable {
-  background: #6c757d;
-  border: 1px solid #495057;
-}
-
-.calendar-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.calendar-month {
-  text-align: center;
-}
-
-.calendar-month h4 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-  margin-bottom: 0.5rem;
-}
-
-.calendar-weekdays div {
-  padding: 0.5rem;
-  font-weight: 600;
-  color: #6c757d;
-  font-size: 0.8rem;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-}
-
-.calendar-day {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
-}
-
-.calendar-day.empty {
-  visibility: hidden;
-}
-
-.calendar-day.available {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  color: #495057;
-}
-
-.calendar-day.available:hover {
-  background: #e9ecef;
-  border-color: #adb5bd;
-  transform: scale(1.05);
-}
-
-.calendar-day.selected {
-  background: #28a745;
-  color: white;
-  border: 1px solid #1e7e34;
-  font-weight: 600;
-}
-
-.calendar-day.selected:hover {
-  background: #218838;
-}
-
-.calendar-day.unavailable {
-  background: #6c757d;
-  color: white;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.calendar-toggle-btn {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.calendar-toggle-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-}
-
-.selected-dates-display {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-}
-
-.selected-dates-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.selected-date-tag {
-  background: #28a745;
-  color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.remove-date-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 0;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.remove-date-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-@media (max-width: 768px) {
-  .calendar-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .calendar-legend {
-    gap: 1rem;
-  }
-
-  .legend-item {
-    font-size: 0.8rem;
-  }
-
-  .calendar-day {
-    font-size: 0.8rem;
-  }
-}
-`;
-
-// Add the styles to the document head
-if (typeof document !== 'undefined') {
-  const styleSheet = document.createElement('style');
-  styleSheet.textContent = calendarStyles;
-  document.head.appendChild(styleSheet);
-}

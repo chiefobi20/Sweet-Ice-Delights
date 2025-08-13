@@ -2,14 +2,19 @@
 
 A modern, full-stack web application for an Italian ice shop featuring a React frontend and Flask backend.
 
+---
+
 ## Features
 
-- **Interactive Flavor Menu** - Browse authentic Italian ice flavors with real-time availability
-- **Responsive Design** - Optimized for desktop, tablet, and mobile devices
+- **Interactive Flavor Menu** - Browse authentic Italian ice flavors with real-time availability and beautiful images
+- **Responsive Design** - Optimized for desktop, tablet, and mobile devices; featured flavors display in a 2×3 grid on desktop
+- **Scroll Animations** - Animate.css and AOS provide smooth, scroll-triggered animations for engaging UI
 - **Contact System** - Email contact form with backend integration
 - **Store Hours & Location** - Easy access to business information
 - **Admin Dashboard** - Manage flavors and availability (backend)
-- **Modern UI/UX** - Glass morphism design with sleek animations
+- **Modern UI/UX** - Glass morphism design, aspect-ratio image grid, and sleek transitions
+
+---
 
 ## Tech Stack
 
@@ -17,7 +22,8 @@ A modern, full-stack web application for an Italian ice shop featuring a React f
 - **React 19.1.0** - Modern UI library
 - **React Router DOM** - Client-side routing
 - **Vite** - Fast build tool and dev server
-- **CSS3** - Custom styling with glass morphism effects
+- **Tailwind CSS** - Utility-first CSS framework with aspect-ratio plugin enabled
+- **Animate.css** & **AOS** - Animation libraries for scroll-triggered and entrance effects
 - **ESLint** - Code linting and formatting
 
 ### Backend
@@ -27,6 +33,8 @@ A modern, full-stack web application for an Italian ice shop featuring a React f
 - **SQLite** - Lightweight database
 - **Email Integration** - Contact form functionality
 
+---
+
 ## Project Structure
 
 ```
@@ -35,10 +43,11 @@ sweet-ice-delights/
 │   ├── src/
 │   │   ├── components/     # React components
 │   │   ├── App.jsx         # Main app component
-│   │   ├── main.jsx        # Entry point
+│   │   ├── main.jsx        # Entry point (AOS/Animate.css imported & initialized)
 │   │   ├── App.css         # Global styles
 │   │   └── index.css       # Base styles
 │   ├── public/             # Static assets
+│   ├── tailwind.config.js  # Tailwind config (aspect-ratio plugin enabled)
 │   ├── package.json        # Frontend dependencies
 │   └── vite.config.js      # Vite configuration
 ├── server/                 # Flask backend
@@ -50,6 +59,8 @@ sweet-ice-delights/
 └── README.md               # This file
 ```
 
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -59,10 +70,14 @@ sweet-ice-delights/
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone the repository & Activate Virtual Environment**
    ```bash
    git clone <repository-url>
    cd sweet-ice-delights
+   python -m venv venv
+   source venv/bin/activate  # For Unix-based systems
+   # or
+   venv\Scripts\activate    # For Windows
    ```
 
 2. **Setup Backend**
@@ -78,7 +93,15 @@ sweet-ice-delights/
    npm install
    ```
 
-### Running the Application
+4. **Install Frontend Animation & Tailwind Plugins**
+   ```bash
+   npm install animate.css aos
+   npm install -D @tailwindcss/aspect-ratio
+   ```
+
+---
+
+## Running the Application
 
 1. **Start the Backend Server**
    ```bash
@@ -94,6 +117,50 @@ sweet-ice-delights/
    ```
    Frontend runs on: `http://localhost:3001`
 
+---
+
+## Frontend Configuration
+
+- **AOS & Animate.css** are imported and initialized in `src/main.jsx`:
+  ```js
+  import 'animate.css';
+  import 'aos/dist/aos.css';
+  import AOS from 'aos';
+
+  AOS.init({
+    duration: 800,
+    once: false,
+    mirror: true,
+    easing: 'ease-in-out',
+    delay: 100,
+    anchorPlacement: 'top-bottom',
+    mobile: true,
+    startEvent: 'DOMContentLoaded',
+    throttleDelay: 99,
+    offset: 120,
+  });
+  ```
+
+- **Tailwind Aspect-Ratio Plugin** is enabled in `tailwind.config.js`:
+  ```js
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+    // ...other plugins
+  ],
+  ```
+
+- **Featured Flavors Grid**:  
+  In `FlavorList.jsx`, the featured flavors are displayed in a responsive 2×3 grid:
+  ```jsx
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl mx-auto">
+    {flavors.slice(0, 6).map(flavor => (
+      // ...flavor card...
+    ))}
+  </div>
+  ```
+
+---
+
 ## 📊 API Endpoints
 
 ### Public Endpoints
@@ -106,13 +173,18 @@ sweet-ice-delights/
 - **Flavor** - Italian ice flavors with pricing
 - **ContactMessage** - Contact information of the site owners
 
+---
+
 ## Design Features
 
 - **Glass Morphism UI** - Modern translucent design elements
 - **Responsive Layout** - Mobile-first design approach
 - **Professional Typography** - Clean, readable fonts
 - **Color Scheme** - Pink and blue gradient themes
-- **Smooth Animations** - Hover effects and transitions
+- **Smooth Animations** - Animate.css and AOS for scroll-triggered effects
+- **Aspect-Ratio Image Grid** - Consistent, square images for flavors
+
+---
 
 ## Development Tools
 
@@ -130,13 +202,17 @@ python check_db.py        # Check database contents
 python update_flavor.py   # Update flavor availability
 ```
 
+---
+
 ## Pages
 
-1. **Home** - Welcome page with featured flavors
-2. **Flavors** - Complete flavor menu with pricing
+1. **Home** - Welcome page with featured flavors (2×3 grid, animated)
+2. **Flavors** - Complete flavor menu with pricing and images
 3. **About** - Company story and values
 4. **Hours** - Store hours and location
 5. **Contact** - Contact form and information
+
+---
 
 ## Deployment
 
@@ -152,6 +228,8 @@ npm run build
 - Set environment variables
 - Deploy to your preferred hosting platform
 
+---
+
 ## Environment Variables
 
 Create a `.env` file in the server directory:
@@ -164,12 +242,16 @@ SENDER_PASSWORD=your-password
 RECIPIENT_EMAIL=business-email@example.com
 ```
 
+---
+
 ## Test Data
 
 The setup script creates sample data:
 - **Test Users**: `testuser` / `admin`
 - **Sample Flavors**: Cherry, Blue Raspberry, Lemon, Orange, Grape, Strawberry
 - **Pricing**: $3.00 - $3.75 per serving
+
+---
 
 ## Contributing
 
@@ -178,6 +260,8 @@ The setup script creates sample data:
 3. Make your changes
 4. Test thoroughly
 5. Submit a pull request
+
+---
 
 ## License
 
