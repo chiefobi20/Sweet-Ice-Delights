@@ -103,10 +103,8 @@ sweet-ice-delights/
 - `POST /api/contact` - Submit contact form
 
 ### Database Models
-- **User** - Customer accounts
 - **Flavor** - Italian ice flavors with pricing
-- **Order** - Customer orders
-- **OrderItem** - Individual order items
+- **ContactMessage** - Contact information of the site owners
 
 ## Design Features
 
