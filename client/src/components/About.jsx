@@ -11,7 +11,7 @@ function About() {
             About Sweet Ice Delights
           </h1>
           <p className="text-xl text-center text-gray-700 max-w-4xl mx-auto leading-relaxed">
-            Sweet Ice Delights was started by [Owner Name] in August of 2016 right here in Atlanta, with one cooler, a handful of fresh fruit, and a promise to keep things simple and honest.
+            Sweet Ice Delights was created in August of 2016 right here in Atlanta, with one cooler, a handful of fresh fruit, and a promise to keep things simple and honest.
           </p>
         </section>
 
@@ -20,7 +20,7 @@ function About() {
             <div>
               <h2 className="text-3xl font-bold mb-6 text-gray-800">Our Story</h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                The founder grew up around block parties, ball games, and church picnics where a cold cup of Italian ice could turn a hot day around. After years of sharing homemade recipes with family and friends, she decided to bring that same happiness to the whole Atlanta community. Today, we still make our ices in small batches, using real fruit, pure cane sugar, and filtered water—no shortcuts, ever. Most of our flavors are dairy-free and vegan so everyone can dig in.
+                The owner of Sweet Ice Delights grew up around block parties, ball games, and church picnics where a cold cup of Italian ice could turn a hot day around. After years of sharing homemade recipes with family and friends, she decided to bring that same happiness to the whole Atlanta community. Today, we still make our ices in small batches, using real fruit, pure cane sugar, and filtered water—no shortcuts, ever. Most of our flavors are dairy-free and vegan so everyone can dig in.
               </p>
             </div>
             <div className="What Makes Us Special">
